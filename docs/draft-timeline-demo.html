@@ -1,0 +1,543 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>12 Tenses Timeline - Kids App Draft</title>
+    <!-- Tailwind CSS for rapid styling -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Nunito', sans-serif;
+            background-color: #f0fdf4;
+            /* Light green background */
+            overflow-x: hidden;
+        }
+
+        /* The vast timeline container */
+        .timeline-container {
+            width: 300vw;
+            /* 3 times the screen width to scroll horizontally */
+            height: 100vh;
+            display: flex;
+            position: relative;
+            cursor: grab;
+            user-select: none;
+            /* Prevent text selection while dragging */
+        }
+
+        .timeline-container:active {
+            cursor: grabbing;
+        }
+
+        /* The 3 main time zones */
+        .zone-past {
+            background: linear-gradient(to right, #fee2e2, #fecaca);
+            width: 100vw;
+            position: relative;
+        }
+
+        .zone-present {
+            background: linear-gradient(to right, #dcfce7, #bbf7d0);
+            width: 100vw;
+            position: relative;
+            border-left: 4px dashed #166534;
+            border-right: 4px dashed #166534;
+        }
+
+        .zone-future {
+            background: linear-gradient(to right, #e0f2fe, #bae6fd);
+            width: 100vw;
+            position: relative;
+        }
+
+        /* Zone Labels */
+        .zone-label {
+            position: absolute;
+            top: 2rem;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 3rem;
+            font-weight: 900;
+            opacity: 0.3;
+            letter-spacing: 0.2rem;
+            text-transform: uppercase;
+        }
+
+        .zone-past .zone-label {
+            color: #991b1b;
+        }
+
+        .zone-present .zone-label {
+            color: #166534;
+        }
+
+        .zone-future .zone-label {
+            color: #075985;
+        }
+
+        /* The actual line running through the middle */
+        .main-axis {
+            position: absolute;
+            top: 50%;
+            left: 0;
+            right: 0;
+            height: 12px;
+            background: #475569;
+            transform: translateY(-50%);
+            border-radius: 6px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            z-index: 10;
+        }
+
+        /* Timeline Nodes (The Tenses) */
+        .node {
+            position: absolute;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            background: white;
+            border: 6px solid #475569;
+            z-index: 20;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+
+        .node:hover {
+            transform: translate(-50%, -50%) scale(1.2);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Specific node positions mapping roughly to time */
+
+        /* PAST */
+        .node-past-perfect {
+            left: 20vw;
+            border-color: #b91c1c;
+        }
+
+        /* Far past */
+        .node-past-perfect-cont {
+            left: 40vw;
+            border-color: #dc2626;
+        }
+
+        .node-past-simple {
+            left: 60vw;
+            border-color: #ef4444;
+        }
+
+        .node-past-cont {
+            left: 80vw;
+            border-color: #f87171;
+        }
+
+        /* PRESENT - Center is 150vw */
+        .node-pres-perfect {
+            left: 120vw;
+            border-color: #16a34a;
+        }
+
+        /* Started in past, up to now */
+        .node-pres-perfect-cont {
+            left: 135vw;
+            border-color: #22c55e;
+        }
+
+        .node-pres-simple {
+            left: 150vw;
+            border-color: #4ade80;
+            background: #f0fdf4;
+            width: 100px;
+            height: 100px;
+        }
+
+        /* Right in the middle */
+        .node-pres-cont {
+            left: 165vw;
+            border-color: #86efac;
+        }
+
+        /* FUTURE */
+        .node-near-future {
+            left: 220vw;
+            border-color: #0284c7;
+        }
+
+        .node-future-simple {
+            left: 240vw;
+            border-color: #0ea5e9;
+        }
+
+        .node-future-cont {
+            left: 260vw;
+            border-color: #38bdf8;
+        }
+
+        .node-future-perfect {
+            left: 280vw;
+            border-color: #7dd3fc;
+        }
+
+
+        /* Locked state for advanced tenses */
+        .locked {
+            background: #e2e8f0;
+            border-color: #94a3b8;
+            filter: grayscale(100%);
+        }
+
+        /* Node Labels */
+        .node-title {
+            position: absolute;
+            top: -50px;
+            width: 200px;
+            text-align: center;
+            font-weight: 800;
+            color: #1e293b;
+            font-size: 1.1rem;
+            text-shadow: 0 2px 4px rgba(255, 255, 255, 0.8);
+            pointer-events: none;
+        }
+
+        .node-title.below {
+            top: auto;
+            bottom: -50px;
+        }
+
+        /* Modal styling */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(15, 23, 42, 0.6);
+            backdrop-filter: blur(4px);
+            z-index: 100;
+            display: none;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal-content {
+            background: white;
+            padding: 2.5rem;
+            border-radius: 2rem;
+            width: 90%;
+            max-width: 500px;
+            text-align: center;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+            transform: scale(0.9);
+            opacity: 0;
+            transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+            position: relative;
+        }
+
+        .modal-overlay.active {
+            display: flex;
+        }
+
+        .modal-overlay.active .modal-content {
+            transform: scale(1);
+            opacity: 1;
+        }
+
+        .icon-bounce {
+            animation: bounce 2s infinite;
+        }
+
+        @keyframes bounce {
+
+            0%,
+            100% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(-10px);
+            }
+        }
+
+        /* Helper to center view initially */
+        .scroll-helper {
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(0, 0, 0, 0.5);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 30px;
+            font-weight: bold;
+            z-index: 50;
+            pointer-events: none;
+            backdrop-filter: blur(4px);
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Instructions Overlay -->
+    <div class="scroll-helper shadow-lg flex items-center gap-2">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M21 12H3" />
+            <path d="m18 15 3-3-3-3" />
+            <path d="m6 9-3 3 3 3" />
+        </svg>
+        <span>Giữ chuột và kéo để khám phá Trục Thời Gian!</span>
+    </div>
+
+    <!-- The Draggable Canvas -->
+    <div class="timeline-container" id="timelineContainer">
+
+        <!-- Main Line -->
+        <div class="main-axis"></div>
+
+        <!-- ZONE 1: PAST -->
+        <div class="zone-past">
+            <div class="zone-label">VÙNG QUÁ KHỨ 🦕</div>
+
+            <div class="node node-past-perfect locked" onclick="showModal('locked', 'Quá khứ hoàn thành')">
+                🔒
+                <div class="node-title">Quá khứ hoàn thành</div>
+            </div>
+
+            <div class="node node-past-perfect-cont locked"
+                onclick="showModal('locked', 'Quá khứ hoàn thành tiếp diễn')">
+                🔒
+                <div class="node-title below">Quá khứ HT Tiếp diễn</div>
+            </div>
+
+            <div class="node node-past-simple"
+                onclick="showModal('Quá khứ đơn', 'Mảnh cắt dứt khoát', 'Chỉ một hành động đã diễn ra và KẾT THÚC HẲN trong quá khứ.', 'yesterday, last week, in 2020', 'I <b>played</b> soccer <i>yesterday</i>. ⚽', '❌')">
+                ❌
+                <div class="node-title">Quá khứ đơn</div>
+            </div>
+
+            <div class="node node-past-cont locked" onclick="showModal('locked', 'Quá khứ tiếp diễn')">
+                🔒
+                <div class="node-title below">Quá khứ tiếp diễn</div>
+            </div>
+        </div>
+
+        <!-- ZONE 2: PRESENT -->
+        <div class="zone-present">
+            <div class="zone-label">VÙNG HIỆN TẠI 🧸</div>
+
+            <div class="node node-pres-perfect"
+                onclick="showModal('Hiện tại hoàn thành', 'Mũi tên dính lẹo', 'Bắt đầu ở quá khứ, nhưng kết quả KHÔNG DỨT KHOÁT mà dính lẹo tới hiện tại.', 'just, already, since, for', 'I <b>have played</b> soccer <i>for 3 years</i>. 👟', '🏹')">
+                🏹
+                <div class="node-title">Hiện tại hoàn thành</div>
+            </div>
+
+            <div class="node node-pres-perfect-cont locked"
+                onclick="showModal('locked', 'Hiện tại hoàn thành tiếp diễn')">
+                🔒
+                <div class="node-title below">Hiện tại HT Tiếp diễn</div>
+            </div>
+
+            <div class="node node-pres-simple icon-bounce"
+                onclick="showModal('Hiện tại đơn', 'Vòng tròn thói quen', 'Chỉ thói quen lặp đi lặp lại hoặc sự thật hiển nhiên luôn đúng.', 'always, usually, every day', 'I <b>play</b> soccer <i>every day</i>. 🔄', '⭐')">
+                ⭐
+                <div class="node-title" style="top: -60px; font-size: 1.3rem;">Hiện tại đơn</div>
+            </div>
+
+            <div class="node node-pres-cont"
+                onclick="showModal('Hiện tại tiếp diễn', 'Radar đang quét', 'Sự việc đang xảy ra NGAY LÚC NÓI, ngay trước mắt bé.', 'now, right now, Look!', '<i>Look!</i> He <b>is playing</b> soccer. 👀', '📡')">
+                📡
+                <div class="node-title below">Hiện tại tiếp diễn</div>
+            </div>
+        </div>
+
+        <!-- ZONE 3: FUTURE -->
+        <div class="zone-future">
+            <div class="zone-label">VÙNG TƯƠNG LAI 🚀</div>
+
+            <div class="node node-near-future"
+                onclick="showModal('Tương lai gần', 'Tên lửa vào bệ phóng', 'Đã có kế hoạch/bằng chứng rõ ràng (có vé, có tiền, mây đen).', 'next week, tomorrow (có bằng chứng)', 'I <b>am going to play</b> soccer (I have the ball). ⚽', '🚀')">
+                🚀
+                <div class="node-title">Tương lai gần</div>
+            </div>
+
+            <div class="node node-future-simple"
+                onclick="showModal('Tương lai đơn', 'Bong bóng suy nghĩ', 'Chưa lên lịch trước, chỉ đoán mò hoặc quyết định bộc phát!', 'tomorrow, I think, maybe', '<i>I think</i> I <b>will play</b> soccer. 💭', '💭')">
+                💭
+                <div class="node-title below">Tương lai đơn</div>
+            </div>
+
+            <div class="node node-future-cont locked" onclick="showModal('locked', 'Tương lai tiếp diễn')">
+                🔒
+                <div class="node-title">Tương lai tiếp diễn</div>
+            </div>
+
+            <div class="node node-future-perfect locked" onclick="showModal('locked', 'Tương lai hoàn thành')">
+                🔒
+                <div class="node-title below">Tương lai hoàn thành</div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Pop-up Info Modal -->
+    <div class="modal-overlay" id="infoModal" onclick="closeModal(event)">
+        <div class="modal-content" onclick="event.stopPropagation()">
+            <button class="absolute top-4 right-4 text-slate-400 hover:text-slate-800 p-2" onclick="forceCloseModal()">
+                <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                    <path d="M18 6L6 18M6 6l12 12" />
+                </svg>
+            </button>
+
+            <div id="modalIcon" class="text-6xl mb-4 icon-bounce">⭐</div>
+
+            <h2 id="modalTitle" class="text-3xl font-black text-slate-800 mb-2">Hiện tại đơn</h2>
+            <p id="modalSubtitle" class="text-green-600 font-bold mb-6 text-lg tracking-wide uppercase">Vòng tròn thói
+                quen</p>
+
+            <div class="bg-slate-50 rounded-xl p-4 mb-6 shadow-inner text-left">
+                <p id="modalDesc" class="text-slate-700 font-semibold mb-4 text-center">Chỉ thói quen lặp đi lặp lại
+                    hoặc sự thật hiển nhiên luôn đúng.</p>
+                <div class="border-t-2 border-slate-200 pt-4">
+                    <p class="text-sm font-black tracking-widest text-slate-400 uppercase mb-2">Thần chú nhận biết</p>
+                    <div id="modalKeywords" class="flex flex-wrap gap-2 justify-center">
+                        <span class="bg-amber-100 text-amber-800 px-3 py-1 rounded-full font-bold">always</span>
+                        <span class="bg-amber-100 text-amber-800 px-3 py-1 rounded-full font-bold">usually</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="bg-green-100 border-2 border-green-300 rounded-xl p-4 text-lg">
+                <p id="modalExample" class="text-slate-800">I <b>play</b> soccer <i>every day</i>. 🔄</p>
+            </div>
+
+            <button onclick="forceCloseModal()"
+                class="mt-8 w-full bg-slate-800 text-white font-bold py-4 rounded-xl hover:bg-slate-700 active:scale-95 transition-all text-xl shadow-[0_4px_0_0_#334155]">
+                Đã Rõ! Thử Luyện Tập →
+            </button>
+        </div>
+    </div>
+
+    <!-- Locked Modal -->
+    <div class="modal-overlay" id="lockedModal" onclick="closeModal(event)">
+        <div class="modal-content bg-slate-100" onclick="event.stopPropagation()">
+            <div class="text-6xl mb-4 opacity-50">🔒</div>
+            <h2 id="lockedTitle" class="text-2xl font-black text-slate-500 mb-2">Thì Chưa Mở Khóa!</h2>
+            <p class="text-slate-500 font-semibold mb-6">Bé cần vượt qua các bài tập của <b>Thì Cơ Bản</b> để thu thập
+                đủ Sao mở khóa khu vực này nhé!</p>
+            <button onclick="forceCloseModal()"
+                class="w-full bg-amber-400 text-amber-900 font-bold py-3 rounded-xl hover:bg-amber-300 active:scale-95 transition-all shadow-[0_4px_0_0_#b45309]">
+                Quay lại làm nhiệm vụ
+            </button>
+        </div>
+    </div>
+
+    <script>
+        // --- DRAG SCROLL LOGIC ---
+        const slider = document.getElementById('timelineContainer');
+        let isDown = false;
+        let startX;
+        let scrollLeft;
+        let isDragging = false; // Add flag to distinguish click from drag
+
+        slider.addEventListener('mousedown', (e) => {
+            isDown = true;
+            isDragging = false;
+            startX = e.pageX - slider.offsetLeft;
+            scrollLeft = window.scrollX;
+        });
+
+        slider.addEventListener('mouseleave', () => {
+            if (isDown) isDragging = true;
+            isDown = false;
+        });
+
+        slider.addEventListener('mouseup', () => {
+            isDown = false;
+        });
+
+        slider.addEventListener('mousemove', (e) => {
+            if (!isDown) return;
+            e.preventDefault();
+            isDragging = true; // Set to true when moving
+            const x = e.pageX - slider.offsetLeft;
+            const walk = (x - startX) * 2; // Scroll speed
+            window.scrollTo(scrollLeft - walk, 0);
+        });
+
+        // Prevent click events on nodes if the user is dragging
+        const nodes = document.querySelectorAll('.node');
+        nodes.forEach(node => {
+            node.addEventListener('click', (e) => {
+                if (isDragging) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                }
+            });
+        });
+
+        // Tự động cuộn đến khu vực HIỆN TẠI khi vừa mở web
+        window.onload = () => {
+            // Chiều rộng trang là 300vw, Hiện tại ở giữa (từ 100vw đến 200vw)
+            // Cuộn đến 100vw (1 trang màn hình)
+            window.scrollTo({
+                left: window.innerWidth,
+                behavior: 'smooth'
+            });
+        }
+
+
+        // --- MODAL LOGIC ---
+        function showModal(type, title, subtitle, desc, keywordsStr, exampl, icon) {
+
+            if (type === 'locked') {
+                document.getElementById('lockedTitle').innerText = title;
+                document.getElementById('lockedModal').classList.add('active');
+                return;
+            }
+
+            // Normal Modal
+            document.getElementById('modalTitle').innerText = type;
+            document.getElementById('modalSubtitle').innerText = title; // Using subtitle arg for the "Nickname"
+            document.getElementById('modalDesc').innerText = desc;
+            document.getElementById('modalIcon').innerText = icon;
+            document.getElementById('modalExample').innerHTML = exampl;
+
+            // Generate keywords pills
+            const keywordsDiv = document.getElementById('modalKeywords');
+            keywordsDiv.innerHTML = '';
+            const keywords = keywordsStr.split(',');
+            keywords.forEach(kw => {
+                const span = document.createElement('span');
+                span.className = 'bg-amber-100 text-amber-800 px-3 py-1 rounded-full font-bold shadow-sm';
+                span.innerText = kw.trim();
+                keywordsDiv.appendChild(span);
+            });
+
+            document.getElementById('infoModal').classList.add('active');
+        }
+
+        function closeModal(e) {
+            // Chỉ đóng khi click ra ngoài overlay
+            if (e.target.classList.contains('modal-overlay')) {
+                forceCloseModal();
+            }
+        }
+
+        function forceCloseModal() {
+            document.querySelectorAll('.modal-overlay').forEach(m => m.classList.remove('active'));
+        }
+    </script>
+</body>
+
+</html>
