@@ -12,16 +12,40 @@ interface QuizSentence {
 }
 
 const QUIZ_DATA: QuizSentence[] = [
-    { id: 'q1', text: "She usually plays piano after dinner.", keywords: ['usually'] },
-    { id: 'q2', text: "We have lived here since 2010.", keywords: ['since'] },
-    { id: 'q3', text: "They will fly to Tokyo tomorrow.", keywords: ['tomorrow'] },
-    { id: 'q4', text: "I am doing my homework right now.", keywords: ['right', 'now'] },
-    { id: 'q5', text: "He went to the zoo yesterday.", keywords: ['yesterday'] },
-    { id: 'q6', text: "Look! The monkey is eating a banana.", keywords: ['look'] },
-    { id: 'q7', text: "We will travel to Paris next week.", keywords: ['next', 'week'] },
-    { id: 'q8', text: "She has already finished her project.", keywords: ['already'] },
-    { id: 'q9', text: "I always brush my teeth in the morning.", keywords: ['always'] },
-    { id: 'q10', text: "They watched a great movie last night.", keywords: ['last', 'night'] }
+    // Hiện tại đơn
+    { id: 'q1', text: "I always wake up early in the morning.", keywords: ['always'] },
+    { id: 'q2', text: "He plays tennis every weekend.", keywords: ['every', 'weekend'] },
+    { id: 'q3', text: "They often go to the cinema together.", keywords: ['often'] },
+
+    // Hiện tại tiếp diễn
+    { id: 'q4', text: "Look! The bird is flying in the sky.", keywords: ['look'] },
+    { id: 'q5', text: "Listen! Someone is singing a song.", keywords: ['listen'] },
+    { id: 'q6', text: "I am studying English right now.", keywords: ['right', 'now'] },
+
+    // Hiện tại hoàn thành
+    { id: 'q7', text: "I have just finished my homework.", keywords: ['just'] },
+    { id: 'q8', text: "They have lived here since 2010.", keywords: ['since'] },
+    { id: 'q9', text: "He has worked there for five years.", keywords: ['for'] },
+
+    // Quá khứ đơn
+    { id: 'q10', text: "She bought a new dress yesterday.", keywords: ['yesterday'] },
+    { id: 'q11', text: "We visited our grandparents last week.", keywords: ['last', 'week'] },
+    { id: 'q12', text: "I met him two days ago.", keywords: ['ago'] },
+
+    // Quá khứ tiếp diễn
+    { id: 'q13', text: "I was sleeping at 10 PM last night.", keywords: ['at', '10', 'pm'] },
+    { id: 'q14', text: "While my mom was cooking, I was reading.", keywords: ['while'] },
+    { id: 'q15', text: "He was walking when it started to rain.", keywords: ['when'] },
+
+    // Quá khứ hoàn thành
+    { id: 'q16', text: "By the time she arrived, I had gone to bed.", keywords: ['by', 'the', 'time'] },
+    { id: 'q17', text: "The train had left before we got to the station.", keywords: ['before'] },
+    { id: 'q18', text: "After they had eaten, they went out.", keywords: ['after'] },
+
+    // Tương lai đơn / Gần
+    { id: 'q19', text: "I think it will rain tomorrow.", keywords: ['think', 'tomorrow'] },
+    { id: 'q20', text: "We are going to travel next month.", keywords: ['next', 'month'] },
+    { id: 'q21', text: "Maybe she will come to the party.", keywords: ['maybe'] }
 ];
 
 export default function KeywordScannerGame() {

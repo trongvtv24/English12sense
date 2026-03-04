@@ -13,31 +13,40 @@ interface SentencePuzzle {
 }
 
 const PUZZLES: SentencePuzzle[] = [
-    {
-        id: 'p1',
-        correctOrder: ['I', 'am', 'playing', 'football', 'now'],
-        jumbledOrder: ['football', 'playing', 'I', 'now', 'am']
-    },
-    {
-        id: 'p2',
-        correctOrder: ['She', 'went', 'to', 'school', 'yesterday'],
-        jumbledOrder: ['yesterday', 'to', 'She', 'went', 'school']
-    },
-    {
-        id: 'p3',
-        correctOrder: ['We', 'will', 'go', 'camping', 'tomorrow'],
-        jumbledOrder: ['go', 'tomorrow', 'We', 'camping', 'will']
-    },
-    {
-        id: 'p4',
-        correctOrder: ['They', 'have', 'lived', 'here', 'since', '2010'],
-        jumbledOrder: ['since', 'They', 'lived', '2010', 'here', 'have']
-    },
-    {
-        id: 'p5',
-        correctOrder: ['He', 'always', 'brushes', 'his', 'teeth'],
-        jumbledOrder: ['his', 'always', 'brushes', 'He', 'teeth']
-    }
+    // Hiện tại đơn
+    { id: 'p1', correctOrder: ['I', 'always', 'wake', 'up', 'early'], jumbledOrder: ['up', 'always', 'early', 'I', 'wake'] },
+    { id: 'p2', correctOrder: ['She', 'plays', 'tennis', 'every', 'weekend'], jumbledOrder: ['every', 'plays', 'weekend', 'She', 'tennis'] },
+    { id: 'p3', correctOrder: ['They', 'usually', 'walk', 'to', 'school'], jumbledOrder: ['to', 'They', 'school', 'usually', 'walk'] },
+
+    // Hiện tại tiếp diễn
+    { id: 'p4', correctOrder: ['The', 'baby', 'is', 'sleeping', 'now'], jumbledOrder: ['sleeping', 'now', 'is', 'The', 'baby'] },
+    { id: 'p5', correctOrder: ['We', 'are', 'studying', 'English', 'today'], jumbledOrder: ['today', 'studying', 'We', 'are', 'English'] },
+    { id: 'p6', correctOrder: ['Look!', 'He', 'is', 'eating', 'apples'], jumbledOrder: ['is', 'apples', 'Look!', 'eating', 'He'] },
+
+    // Hiện tại hoàn thành
+    { id: 'p7', correctOrder: ['I', 'have', 'read', 'that', 'book'], jumbledOrder: ['read', 'I', 'that', 'have', 'book'] },
+    { id: 'p8', correctOrder: ['She', 'has', 'lived', 'here', 'since', '2010'], jumbledOrder: ['has', 'lived', '2010', 'She', 'since', 'here'] },
+    { id: 'p9', correctOrder: ['They', 'have', 'not', 'finished', 'yet'], jumbledOrder: ['have', 'yet', 'finished', 'not', 'They'] },
+
+    // Quá khứ đơn
+    { id: 'p10', correctOrder: ['We', 'went', 'to', 'the', 'zoo'], jumbledOrder: ['zoo', 'went', 'to', 'We', 'the'] },
+    { id: 'p11', correctOrder: ['I', 'bought', 'a', 'new', 'car'], jumbledOrder: ['a', 'bought', 'car', 'I', 'new'] },
+    { id: 'p12', correctOrder: ['She', 'watched', 'TV', 'last', 'night'], jumbledOrder: ['watched', 'last', 'TV', 'night', 'She'] },
+
+    // Quá khứ tiếp diễn
+    { id: 'p13', correctOrder: ['I', 'was', 'sleeping', 'at', '8 PM'], jumbledOrder: ['at', 'sleeping', 'I', '8 PM', 'was'] },
+    { id: 'p14', correctOrder: ['They', 'were', 'playing', 'football', 'yesterday'], jumbledOrder: ['playing', 'yesterday', 'They', 'football', 'were'] },
+    { id: 'p15', correctOrder: ['She', 'was', 'cooking', 'while', 'I', 'read'], jumbledOrder: ['cooking', 'while', 'read', 'I', 'She', 'was'] },
+
+    // Quá khứ hoàn thành
+    { id: 'p16', correctOrder: ['I', 'had', 'finished', 'before', 'she', 'came'], jumbledOrder: ['finished', 'she', 'before', 'I', 'had', 'came'] },
+    { id: 'p17', correctOrder: ['The', 'train', 'had', 'left', 'early'], jumbledOrder: ['had', 'early', 'The', 'left', 'train'] },
+    { id: 'p18', correctOrder: ['They', 'had', 'eaten', 'dinner', 'by', 'then'], jumbledOrder: ['dinner', 'had', 'eaten', 'by', 'They', 'then'] },
+
+    // Tương lai đơn / Gần
+    { id: 'p19', correctOrder: ['I', 'think', 'it', 'will', 'rain'], jumbledOrder: ['will', 'rain', 'I', 'think', 'it'] },
+    { id: 'p20', correctOrder: ['We', 'are', 'going', 'to', 'travel'], jumbledOrder: ['are', 'travel', 'to', 'going', 'We'] },
+    { id: 'p21', correctOrder: ['She', 'will', 'visit', 'us', 'next', 'week'], jumbledOrder: ['will', 'next', 'week', 'us', 'visit', 'She'] }
 ];
 
 export default function SentenceBuilderGame() {

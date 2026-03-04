@@ -12,55 +12,116 @@ interface BugSentence {
 }
 
 const LEVEL_DATA: BugSentence[] = [
+    // Hiện tại đơn
     {
-        id: 'b1',
-        words: [
-            { text: "He", isBug: false, fix: "" },
-            { text: "don't", isBug: true, fix: "doesn't" },
-            { text: "like", isBug: false, fix: "" },
-            { text: "reading", isBug: false, fix: "" },
-            { text: "books.", isBug: false, fix: "" }
+        id: 'b1', words: [
+            { text: "She", isBug: false, fix: "" }, { text: "go", isBug: true, fix: "goes" }, { text: "to", isBug: false, fix: "" }, { text: "school", isBug: false, fix: "" }, { text: "every day.", isBug: false, fix: "" }
         ]
     },
     {
-        id: 'b2',
-        words: [
-            { text: "We", isBug: false, fix: "" },
-            { text: "was", isBug: true, fix: "were" },
-            { text: "at", isBug: false, fix: "" },
-            { text: "the", isBug: false, fix: "" },
-            { text: "park", isBug: false, fix: "" },
-            { text: "yesterday.", isBug: false, fix: "" }
+        id: 'b2', words: [
+            { text: "They", isBug: false, fix: "" }, { text: "doesn't", isBug: true, fix: "don't" }, { text: "like", isBug: false, fix: "" }, { text: "eating", isBug: false, fix: "" }, { text: "apples.", isBug: false, fix: "" }
         ]
     },
     {
-        id: 'b3',
-        words: [
-            { text: "Look!", isBug: false, fix: "" },
-            { text: "She", isBug: false, fix: "" },
-            { text: "sing", isBug: true, fix: "is singing" },
-            { text: "a", isBug: false, fix: "" },
-            { text: "song.", isBug: false, fix: "" }
+        id: 'b3', words: [
+            { text: "I", isBug: false, fix: "" }, { text: "am", isBug: true, fix: "do" }, { text: "not", isBug: false, fix: "" }, { text: "play", isBug: false, fix: "" }, { text: "tennis.", isBug: false, fix: "" }
+        ]
+    },
+    // Hiện tại tiếp diễn
+    {
+        id: 'b4', words: [
+            { text: "He", isBug: false, fix: "" }, { text: "is", isBug: false, fix: "" }, { text: "play", isBug: true, fix: "playing" }, { text: "games", isBug: false, fix: "" }, { text: "now.", isBug: false, fix: "" }
         ]
     },
     {
-        id: 'b4',
-        words: [
-            { text: "I", isBug: false, fix: "" },
-            { text: "have", isBug: false, fix: "" },
-            { text: "went", isBug: true, fix: "gone" },
-            { text: "to", isBug: false, fix: "" },
-            { text: "Paris.", isBug: false, fix: "" }
+        id: 'b5', words: [
+            { text: "We", isBug: false, fix: "" }, { text: "am", isBug: true, fix: "are" }, { text: "studying", isBug: false, fix: "" }, { text: "at", isBug: false, fix: "" }, { text: "the moment.", isBug: false, fix: "" }
         ]
     },
     {
-        id: 'b5',
-        words: [
-            { text: "They", isBug: false, fix: "" },
-            { text: "will", isBug: false, fix: "" },
-            { text: "playing", isBug: true, fix: "play" },
-            { text: "football", isBug: false, fix: "" },
-            { text: "tomorrow.", isBug: false, fix: "" }
+        id: 'b6', words: [
+            { text: "Look!", isBug: false, fix: "" }, { text: "It", isBug: false, fix: "" }, { text: "is", isBug: false, fix: "" }, { text: "rain", isBug: true, fix: "raining." }
+        ]
+    },
+    // Hiện tại hoàn thành
+    {
+        id: 'b7', words: [
+            { text: "I", isBug: false, fix: "" }, { text: "have", isBug: false, fix: "" }, { text: "see", isBug: true, fix: "seen" }, { text: "that", isBug: false, fix: "" }, { text: "movie", isBug: false, fix: "" }, { text: "already.", isBug: false, fix: "" }
+        ]
+    },
+    {
+        id: 'b8', words: [
+            { text: "She", isBug: false, fix: "" }, { text: "have", isBug: true, fix: "has" }, { text: "lived", isBug: false, fix: "" }, { text: "here", isBug: false, fix: "" }, { text: "for 5 years.", isBug: false, fix: "" }
+        ]
+    },
+    {
+        id: 'b9', words: [
+            { text: "They", isBug: false, fix: "" }, { text: "haven't", isBug: false, fix: "" }, { text: "finish", isBug: true, fix: "finished" }, { text: "their", isBug: false, fix: "" }, { text: "homework.", isBug: false, fix: "" }
+        ]
+    },
+    // Quá khứ đơn
+    {
+        id: 'b10', words: [
+            { text: "We", isBug: false, fix: "" }, { text: "go", isBug: true, fix: "went" }, { text: "to", isBug: false, fix: "" }, { text: "Paris", isBug: false, fix: "" }, { text: "last year.", isBug: false, fix: "" }
+        ]
+    },
+    {
+        id: 'b11', words: [
+            { text: "She", isBug: false, fix: "" }, { text: "didn't", isBug: false, fix: "" }, { text: "played", isBug: true, fix: "play" }, { text: "outside", isBug: false, fix: "" }, { text: "yesterday.", isBug: false, fix: "" }
+        ]
+    },
+    {
+        id: 'b12', words: [
+            { text: "Was", isBug: true, fix: "Did" }, { text: "you", isBug: false, fix: "" }, { text: "watch", isBug: false, fix: "" }, { text: "the match", isBug: false, fix: "" }, { text: "last night?", isBug: false, fix: "" }
+        ]
+    },
+    // Quá khứ tiếp diễn
+    {
+        id: 'b13', words: [
+            { text: "I", isBug: false, fix: "" }, { text: "was", isBug: false, fix: "" }, { text: "sleep", isBug: true, fix: "sleeping" }, { text: "at 8 PM.", isBug: false, fix: "" }
+        ]
+    },
+    {
+        id: 'b14', words: [
+            { text: "They", isBug: false, fix: "" }, { text: "was", isBug: true, fix: "were" }, { text: "watching", isBug: false, fix: "" }, { text: "TV", isBug: false, fix: "" }, { text: "when", isBug: false, fix: "" }, { text: "I called.", isBug: false, fix: "" }
+        ]
+    },
+    {
+        id: 'b15', words: [
+            { text: "She", isBug: false, fix: "" }, { text: "was reading", isBug: false, fix: "" }, { text: "while", isBug: false, fix: "" }, { text: "he", isBug: false, fix: "" }, { text: "plays", isBug: true, fix: "was playing" }, { text: "games.", isBug: false, fix: "" }
+        ]
+    },
+    // Quá khứ hoàn thành
+    {
+        id: 'b16', words: [
+            { text: "I", isBug: false, fix: "" }, { text: "had", isBug: false, fix: "" }, { text: "leave", isBug: true, fix: "left" }, { text: "before", isBug: false, fix: "" }, { text: "she", isBug: false, fix: "" }, { text: "arrived.", isBug: false, fix: "" }
+        ]
+    },
+    {
+        id: 'b17', words: [
+            { text: "They", isBug: false, fix: "" }, { text: "has", isBug: true, fix: "had" }, { text: "eaten", isBug: false, fix: "" }, { text: "dinner", isBug: false, fix: "" }, { text: "by 8 PM.", isBug: false, fix: "" }
+        ]
+    },
+    {
+        id: 'b18', words: [
+            { text: "After", isBug: false, fix: "" }, { text: "he", isBug: false, fix: "" }, { text: "has", isBug: true, fix: "had" }, { text: "finished", isBug: false, fix: "" }, { text: "homework,", isBug: false, fix: "" }, { text: "he slept.", isBug: false, fix: "" }
+        ]
+    },
+    // Tương lai đơn / Gần
+    {
+        id: 'b19', words: [
+            { text: "I", isBug: false, fix: "" }, { text: "think", isBug: false, fix: "" }, { text: "it", isBug: false, fix: "" }, { text: "will", isBug: false, fix: "" }, { text: "raining", isBug: true, fix: "rain" }, { text: "tomorrow.", isBug: false, fix: "" }
+        ]
+    },
+    {
+        id: 'b20', words: [
+            { text: "We", isBug: false, fix: "" }, { text: "is", isBug: true, fix: "are" }, { text: "going to", isBug: false, fix: "" }, { text: "travel", isBug: false, fix: "" }, { text: "next week.", isBug: false, fix: "" }
+        ]
+    },
+    {
+        id: 'b21', words: [
+            { text: "She", isBug: false, fix: "" }, { text: "will", isBug: false, fix: "" }, { text: "goes", isBug: true, fix: "go" }, { text: "to", isBug: false, fix: "" }, { text: "the party.", isBug: false, fix: "" }
         ]
     }
 ];

@@ -14,16 +14,41 @@ interface QuizItem {
 }
 
 const QUIZZES: QuizItem[] = [
-    { id: 'sq1', sentence: "Look! The monkey ___ a banana right now.", options: ['eats', 'is eating', 'ate'], correctAnswer: 'is eating' },
-    { id: 'sq2', sentence: "We ___ to the zoo yesterday.", options: ['go', 'are going', 'went'], correctAnswer: 'went' },
-    { id: 'sq3', sentence: "I think it ___ rain tomorrow.", options: ['will', 'is going to', 'rains'], correctAnswer: 'will' },
-    { id: 'sq4', sentence: "She always ___ milk for breakfast.", options: ['drink', 'drinks', 'is drinking'], correctAnswer: 'drinks' },
-    { id: 'sq5', sentence: "They ___ a new house next year.", options: ['will buy', 'bought', 'are buying'], correctAnswer: 'will buy' },
-    { id: 'sq6', sentence: "I ___ my keys. I can't find them!", options: ['lost', 'have lost', 'lose'], correctAnswer: 'have lost' },
-    { id: 'sq7', sentence: "Listen! Someone ___ the piano.", options: ['plays', 'is playing', 'played'], correctAnswer: 'is playing' },
-    { id: 'sq8', sentence: "He ___ TV when I called him.", options: ['watched', 'was watching', 'is watching'], correctAnswer: 'was watching' },
-    { id: 'sq9', sentence: "By the time we arrived, they ___ already left.", options: ['have', 'had', 'are'], correctAnswer: 'had' },
-    { id: 'sq10', sentence: "We ___ each other since we were kids.", options: ['know', 'knew', 'have known'], correctAnswer: 'have known' }
+    // Hiện tại đơn
+    { id: 'sq1', sentence: "I ___ my grandparents every weekend.", options: ['visit', 'am visiting', 'visited'], correctAnswer: 'visit' },
+    { id: 'sq2', sentence: "Water ___ at 100 degrees Celsius.", options: ['boil', 'boils', 'is boiling'], correctAnswer: 'boils' },
+    { id: 'sq3', sentence: "The train ___ at 8 AM tomorrow.", options: ['leaves', 'is leaving', 'left'], correctAnswer: 'leaves' },
+
+    // Hiện tại tiếp diễn
+    { id: 'sq4', sentence: "Listen! The baby ___ in the bedroom.", options: ['cries', 'is crying', 'cried'], correctAnswer: 'is crying' },
+    { id: 'sq5', sentence: "We ___ for our English exam right now.", options: ['study', 'are studying', 'studied'], correctAnswer: 'are studying' },
+    { id: 'sq6', sentence: "She ___ dinner at the moment.", options: ['cooks', 'is cooking', 'has cooked'], correctAnswer: 'is cooking' },
+
+    // Hiện tại hoàn thành
+    { id: 'sq7', sentence: "They ___ in this city since 2015.", options: ['live', 'are living', 'have lived'], correctAnswer: 'have lived' },
+    { id: 'sq8', sentence: "I ___ three cups of coffee today.", options: ['drink', 'drank', 'have drunk'], correctAnswer: 'have drunk' },
+    { id: 'sq9', sentence: "She ___ her homework already.", options: ['finishes', 'finished', 'has finished'], correctAnswer: 'has finished' },
+
+    // Quá khứ đơn
+    { id: 'sq10', sentence: "We ___ to the beach last summer.", options: ['go', 'went', 'have gone'], correctAnswer: 'went' },
+    { id: 'sq11', sentence: "He ___ a new car two days ago.", options: ['buys', 'bought', 'has bought'], correctAnswer: 'bought' },
+    { id: 'sq12', sentence: "I ___ Mary at the park yesterday.", options: ['see', 'saw', 'have seen'], correctAnswer: 'saw' },
+
+    // Quá khứ tiếp diễn
+    { id: 'sq13', sentence: "When I called him, he ___ TV.", options: ['watched', 'was watching', 'is watching'], correctAnswer: 'was watching' },
+    { id: 'sq14', sentence: "They ___ football at 5 PM yesterday.", options: ['play', 'played', 'were playing'], correctAnswer: 'were playing' },
+    { id: 'sq15', sentence: "While I was reading, my brother ___ music.", options: ['listens', 'listened', 'was listening'], correctAnswer: 'was listening' },
+
+    // Quá khứ hoàn thành
+    { id: 'sq16', sentence: "By the time we arrived, the movie ___.", options: ['starts', 'started', 'had started'], correctAnswer: 'had started' },
+    { id: 'sq17', sentence: "She ___ all the food before I came.", options: ['eats', 'ate', 'had eaten'], correctAnswer: 'had eaten' },
+    { id: 'sq18', sentence: "They ___ the report before the meeting began.", options: ['finish', 'finished', 'had finished'], correctAnswer: 'had finished' },
+
+    // Tương lai đơn / Gần
+    { id: 'sq19', sentence: "I think it ___ rain tomorrow.", options: ['will', 'is going to', 'rains'], correctAnswer: 'will' },
+    { id: 'sq20', sentence: "Look at those dark clouds! It ___ rain.", options: ['will', 'is going to', 'rains'], correctAnswer: 'is going to' },
+    { id: 'sq21', sentence: "Don't worry, I ___ help you with that.", options: ['will', 'am going to', 'help'], correctAnswer: 'will' },
+    { id: 'sq22', sentence: "We ___ our grandparents next week.", options: ['will visit', 'are going to visit', 'visit'], correctAnswer: 'are going to visit' }
 ];
 
 export default function SpaceShooterGame() {

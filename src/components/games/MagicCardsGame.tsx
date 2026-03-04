@@ -13,16 +13,40 @@ interface Flashcard {
 }
 
 const CARDS: Flashcard[] = [
-    { id: 'f1', front: 'Yesterday', backTitle: 'Quá Khứ Đơn', backDesc: 'Ngày hôm qua' },
-    { id: 'f2', front: 'Always', backTitle: 'Hiện Tại Đơn', backDesc: 'Luôn luôn, thường xuyên' },
-    { id: 'f3', front: 'Tomorrow', backTitle: 'Tương Lai Đơn', backDesc: 'Ngày mai' },
-    { id: 'f4', front: 'Since 2010', backTitle: 'Hiện Tại Hoàn Thành', backDesc: 'Từ năm 2010 đến nay' },
-    { id: 'f5', front: 'Right now', backTitle: 'Hiện Tại Tiếp Diễn', backDesc: 'Ngay lúc này' },
-    { id: 'f6', front: 'Next week', backTitle: 'Tương Lai Đơn', backDesc: 'Tuần tới' },
-    { id: 'f7', front: 'Last night', backTitle: 'Quá Khứ Đơn', backDesc: 'Tối qua' },
-    { id: 'f8', front: 'Usually', backTitle: 'Hiện Tại Đơn', backDesc: 'Thường xuyên' },
-    { id: 'f9', front: 'For 3 years', backTitle: 'Hiện Tại Hoàn Thành', backDesc: 'Khoảng thời gian (3 năm)' },
-    { id: 'f10', front: 'At 8 PM yesterday', backTitle: 'Quá Khứ Tiếp Diễn', backDesc: 'Tại 1 thời điểm cụ thể ở QK' }
+    // Hiện tại đơn
+    { id: 'f1', front: 'Always', backTitle: 'Hiện Tại Đơn', backDesc: 'Luôn luôn, thường xuyên xảy ra' },
+    { id: 'f2', front: 'Usually', backTitle: 'Hiện Tại Đơn', backDesc: 'Thường thường' },
+    { id: 'f3', front: 'Every day', backTitle: 'Hiện Tại Đơn', backDesc: 'Mỗi ngày (thói quen)' },
+
+    // Hiện tại tiếp diễn
+    { id: 'f4', front: 'Right now', backTitle: 'Hiện Tại Tiếp Diễn', backDesc: 'Ngay lúc này' },
+    { id: 'f5', front: 'At the moment', backTitle: 'Hiện Tại Tiếp Diễn', backDesc: 'Tại thời điểm này' },
+    { id: 'f6', front: 'Look!', backTitle: 'Hiện Tại Tiếp Diễn', backDesc: 'Nhìn kìa! (Sự việc đang xảy ra trước mắt)' },
+
+    // Hiện tại hoàn thành
+    { id: 'f7', front: 'Since 2010', backTitle: 'Hiện Tại Hoàn Thành', backDesc: 'Từ năm 2010 (Đến nay vẫn còn)' },
+    { id: 'f8', front: 'For 3 years', backTitle: 'Hiện Tại Hoàn Thành', backDesc: 'Được 3 năm (Khoảng thời gian)' },
+    { id: 'f9', front: 'Already', backTitle: 'Hiện Tại Hoàn Thành', backDesc: 'Đã xong rồi' },
+
+    // Quá khứ đơn
+    { id: 'f10', front: 'Yesterday', backTitle: 'Quá Khứ Đơn', backDesc: 'Ngày hôm qua' },
+    { id: 'f11', front: 'Last night', backTitle: 'Quá Khứ Đơn', backDesc: 'Tối qua (Đã chấm dứt)' },
+    { id: 'f12', front: 'Two days ago', backTitle: 'Quá Khứ Đơn', backDesc: 'Hai ngày trước' },
+
+    // Quá khứ tiếp diễn
+    { id: 'f13', front: 'At 8 PM yesterday', backTitle: 'Quá Khứ Tiếp Diễn', backDesc: 'Hành động đang xảy ra tại 1 thời điểm ở QK' },
+    { id: 'f14', front: 'While', backTitle: 'Quá Khứ Tiếp Diễn', backDesc: 'Trong lúc (2 việc cùng diễn ra ở QK)' },
+    { id: 'f15', front: 'When (QK)', backTitle: 'Quá Khứ Tiếp Diễn', backDesc: 'Khi (1 việc đang xảy ra thì việc khác xen vào)' },
+
+    // Quá khứ hoàn thành
+    { id: 'f16', front: 'Before (QK)', backTitle: 'Quá Khứ Hoàn Thành', backDesc: 'Xảy ra trước 1 hành động ở quá khứ' },
+    { id: 'f17', front: 'By the time', backTitle: 'Quá Khứ Hoàn Thành', backDesc: 'Vào lúc (hành động đã xong trước đó)' },
+    { id: 'f18', front: 'After', backTitle: 'Quá Khứ Hoàn Thành', backDesc: 'Sau khi (việc này xong mới đến việc kia)' },
+
+    // Tương lai
+    { id: 'f19', front: 'Tomorrow', backTitle: 'Tương Lai Đơn', backDesc: 'Ngày mai' },
+    { id: 'f20', front: 'Next week', backTitle: 'Tương Lai Đơn', backDesc: 'Tuần tới (dự định)' },
+    { id: 'f21', front: 'I think', backTitle: 'Tương Lai Đơn', backDesc: 'Tôi nghĩ là (đưa ra dự đoán)' }
 ];
 
 export default function MagicCardsGame() {

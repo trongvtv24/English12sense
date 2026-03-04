@@ -12,21 +12,42 @@ interface WordCard {
 }
 
 const INITIAL_WORDS: WordCard[] = [
+    // --- PAST ZONE ---
     { id: 'w1', word: 'Yesterday', correctZone: 'PAST' },
-    { id: 'w2', word: 'Always', correctZone: 'PRESENT' },
-    { id: 'w3', word: 'Tomorrow', correctZone: 'FUTURE' },
-    { id: 'w4', word: 'Last week', correctZone: 'PAST' },
-    { id: 'w5', word: 'Right now', correctZone: 'PRESENT' },
-    { id: 'w6', word: 'Next year', correctZone: 'FUTURE' },
-    { id: 'w7', word: 'Two days ago', correctZone: 'PAST' },
-    { id: 'w8', word: 'Usually', correctZone: 'PRESENT' },
-    { id: 'w9', word: 'In 2050', correctZone: 'FUTURE' },
-    { id: 'w10', word: 'In 1990', correctZone: 'PAST' },
-    { id: 'w11', word: 'At the moment', correctZone: 'PRESENT' },
-    { id: 'w12', word: 'Next Monday', correctZone: 'FUTURE' },
-    { id: 'w13', word: 'Recently', correctZone: 'PAST' },
-    { id: 'w14', word: 'Often', correctZone: 'PRESENT' },
-    { id: 'w15', word: 'In the future', correctZone: 'FUTURE' }
+    { id: 'w2', word: 'Last week', correctZone: 'PAST' },
+    { id: 'w3', word: 'Two days ago', correctZone: 'PAST' },
+    { id: 'w4', word: 'In 1990', correctZone: 'PAST' },
+    { id: 'w5', word: 'Recently', correctZone: 'PAST' },
+    { id: 'w6', word: 'Last night', correctZone: 'PAST' },
+    { id: 'w7', word: 'When I was young', correctZone: 'PAST' },
+    { id: 'w8', word: 'Last year', correctZone: 'PAST' },
+    { id: 'w9', word: 'Before', correctZone: 'PAST' },
+    { id: 'w10', word: 'The other day', correctZone: 'PAST' },
+
+    // --- PRESENT ZONE ---
+    { id: 'w11', word: 'Always', correctZone: 'PRESENT' },
+    { id: 'w12', word: 'Usually', correctZone: 'PRESENT' },
+    { id: 'w13', word: 'Every day', correctZone: 'PRESENT' },
+    { id: 'w14', word: 'Right now', correctZone: 'PRESENT' },
+    { id: 'w15', word: 'At the moment', correctZone: 'PRESENT' },
+    { id: 'w16', word: 'Look!', correctZone: 'PRESENT' },
+    { id: 'w17', word: 'Listen!', correctZone: 'PRESENT' },
+    { id: 'w18', word: 'Often', correctZone: 'PRESENT' },
+    { id: 'w19', word: 'Sometimes', correctZone: 'PRESENT' },
+    { id: 'w20', word: 'Nowadays', correctZone: 'PRESENT' },
+    { id: 'w21', word: 'Currently', correctZone: 'PRESENT' },
+
+    // --- FUTURE ZONE ---
+    { id: 'w22', word: 'Tomorrow', correctZone: 'FUTURE' },
+    { id: 'w23', word: 'Next year', correctZone: 'FUTURE' },
+    { id: 'w24', word: 'In 2050', correctZone: 'FUTURE' },
+    { id: 'w25', word: 'Next Monday', correctZone: 'FUTURE' },
+    { id: 'w26', word: 'In the future', correctZone: 'FUTURE' },
+    { id: 'w27', word: 'Soon', correctZone: 'FUTURE' },
+    { id: 'w28', word: 'Later', correctZone: 'FUTURE' },
+    { id: 'w29', word: 'Next month', correctZone: 'FUTURE' },
+    { id: 'w30', word: 'Next week', correctZone: 'FUTURE' },
+    { id: 'w31', word: 'By tomorrow', correctZone: 'FUTURE' }
 ];
 
 export default function TimeBasketGame() {
