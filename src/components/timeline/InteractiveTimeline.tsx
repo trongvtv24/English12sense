@@ -3,13 +3,20 @@
 import React, { useRef, useState, useEffect } from 'react';
 import { motion, useScroll, useTransform, useMotionValue, useSpring } from 'framer-motion';
 import { tensesData, TenseData } from '@/data/tensesData';
-import { Lock, Navigation } from 'lucide-react';
+import { Lock, Navigation, Star, Trophy } from 'lucide-react';
+import { useGameStore } from '@/lib/store';
 import HintButton from '../ui/HintButton';
 
 export default function InteractiveTimeline() {
     const containerRef = useRef<HTMLDivElement>(null);
     const [selectedTense, setSelectedTense] = useState<TenseData | null>(null);
     const [isLockedModalOpen, setIsLockedModalOpen] = useState(false);
+    const [lockedAttemptTense, setLockedAttemptTense] = useState<TenseData | null>(null);
+    const { level } = useGameStore();
+
+    const unlockedCount = tensesData.filter(t => level >= (t.requiredLevel || 1)).length;
+    const totalTenses = tensesData.length;
+    const isFullyUnlocked = unlockedCount === totalTenses;
 
     // Auto scroll to present zone on mount
     useEffect(() => {
@@ -24,7 +31,9 @@ export default function InteractiveTimeline() {
     }, []);
 
     const handleNodeClick = (tense: TenseData) => {
-        if (tense.isLockedDefault) {
+        const isLocked = level < (tense.requiredLevel || 1);
+        if (isLocked) {
+            setLockedAttemptTense(tense);
             setIsLockedModalOpen(true);
         } else {
             setSelectedTense(tense);
@@ -101,6 +110,7 @@ export default function InteractiveTimeline() {
 
                     {/* Render Nodes */}
                     {tensesData.map((tense) => {
+                        const isLocked = level < (tense.requiredLevel || 1);
                         const isPresentSimple = tense.id === 'present-simple';
 
                         return (
@@ -110,16 +120,16 @@ export default function InteractiveTimeline() {
                                 whileTap={{ scale: 0.95 }}
                                 onClick={() => handleNodeClick(tense)}
                                 className={`absolute top-1/2 -translate-y-1/2 -translate-x-1/2 flex items-center justify-center rounded-full bg-white border-[6px] shadow-lg cursor-pointer z-20 transition-colors
-                  ${tense.isLockedDefault ? 'bg-slate-200 border-slate-400 grayscale filter' : ''}
+                  ${isLocked ? 'bg-slate-200 border-slate-400 grayscale filter' : ''}
                   ${isPresentSimple ? 'w-[100px] h-[100px] animate-bounce-slow' : 'w-[80px] h-[80px]'}
                 `}
                                 style={{
                                     left: tense.position.left,
-                                    borderColor: tense.isLockedDefault ? '#94a3b8' : tense.borderColor
+                                    borderColor: isLocked ? '#94a3b8' : tense.borderColor
                                 }}
                             >
-                                <div className={`text-4xl ${tense.isLockedDefault ? 'opacity-50' : ''}`}>
-                                    {tense.icon}
+                                <div className={`text-4xl ${isLocked ? 'opacity-50' : ''}`}>
+                                    {isLocked ? '🔒' : tense.icon}
                                 </div>
 
                                 {/* Node Title Label */}
@@ -184,7 +194,7 @@ export default function InteractiveTimeline() {
             )}
 
             {/* Locked Modal */}
-            {isLockedModalOpen && (
+            {isLockedModalOpen && lockedAttemptTense && (
                 <div className="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 flex items-center justify-center p-4" onClick={closeModal}>
                     <motion.div
                         initial={{ opacity: 0, scale: 0.9 }}
@@ -194,9 +204,14 @@ export default function InteractiveTimeline() {
                     >
                         <div className="text-7xl mb-6 opacity-40"><Lock className="mx-auto" size={72} /></div>
                         <h2 className="text-3xl font-black text-slate-600 mb-4">Thì Chưa Mở Khóa!</h2>
-                        <p className="text-slate-500 font-bold mb-8 text-lg">Bé cần vượt qua các bài tập của <b>Thì Cơ Bản</b> để thu thập đủ Sao mở khóa khu vực này nhé!</p>
+                        <p className="text-slate-500 font-bold mb-6 text-lg">
+                            Bé cần đạt <strong className="text-amber-500 text-xl">Level {lockedAttemptTense.requiredLevel}</strong> để mở khóa hành tinh này!
+                        </p>
+                        <div className="bg-slate-200 text-slate-500 font-bold py-2 px-4 rounded-xl mb-8 inline-block">
+                            (Level hiện tại: {level})
+                        </div>
                         <button onClick={closeModal} className="w-full bg-amber-400 text-amber-900 font-black py-4 rounded-xl hover:bg-amber-300 active:translate-y-1 transition-all text-xl shadow-[0_6px_0_0_#b45309]">
-                            Quay Lại Làm Nhiệm Vụ
+                            Vào Khu Vui Chơi Lấy Sao
                         </button>
                     </motion.div>
                 </div>
