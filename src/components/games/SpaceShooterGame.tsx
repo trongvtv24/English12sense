@@ -14,24 +14,16 @@ interface QuizItem {
 }
 
 const QUIZZES: QuizItem[] = [
-    {
-        id: 'sq1',
-        sentence: "Look! The monkey ___ a banana right now.",
-        options: ['eats', 'is eating', 'ate'],
-        correctAnswer: 'is eating'
-    },
-    {
-        id: 'sq2',
-        sentence: "We ___ to the zoo yesterday.",
-        options: ['go', 'are going', 'went'],
-        correctAnswer: 'went'
-    },
-    {
-        id: 'sq3',
-        sentence: "I think it ___ rain tomorrow.",
-        options: ['will', 'is going to', 'rains'],
-        correctAnswer: 'will'
-    }
+    { id: 'sq1', sentence: "Look! The monkey ___ a banana right now.", options: ['eats', 'is eating', 'ate'], correctAnswer: 'is eating' },
+    { id: 'sq2', sentence: "We ___ to the zoo yesterday.", options: ['go', 'are going', 'went'], correctAnswer: 'went' },
+    { id: 'sq3', sentence: "I think it ___ rain tomorrow.", options: ['will', 'is going to', 'rains'], correctAnswer: 'will' },
+    { id: 'sq4', sentence: "She always ___ milk for breakfast.", options: ['drink', 'drinks', 'is drinking'], correctAnswer: 'drinks' },
+    { id: 'sq5', sentence: "They ___ a new house next year.", options: ['will buy', 'bought', 'are buying'], correctAnswer: 'will buy' },
+    { id: 'sq6', sentence: "I ___ my keys. I can't find them!", options: ['lost', 'have lost', 'lose'], correctAnswer: 'have lost' },
+    { id: 'sq7', sentence: "Listen! Someone ___ the piano.", options: ['plays', 'is playing', 'played'], correctAnswer: 'is playing' },
+    { id: 'sq8', sentence: "He ___ TV when I called him.", options: ['watched', 'was watching', 'is watching'], correctAnswer: 'was watching' },
+    { id: 'sq9', sentence: "By the time we arrived, they ___ already left.", options: ['have', 'had', 'are'], correctAnswer: 'had' },
+    { id: 'sq10', sentence: "We ___ each other since we were kids.", options: ['know', 'knew', 'have known'], correctAnswer: 'have known' }
 ];
 
 export default function SpaceShooterGame() {

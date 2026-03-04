@@ -14,7 +14,14 @@ interface QuizSentence {
 const QUIZ_DATA: QuizSentence[] = [
     { id: 'q1', text: "She usually plays piano after dinner.", keywords: ['usually'] },
     { id: 'q2', text: "We have lived here since 2010.", keywords: ['since'] },
-    { id: 'q3', text: "They will fly to Tokyo tomorrow.", keywords: ['tomorrow'] }
+    { id: 'q3', text: "They will fly to Tokyo tomorrow.", keywords: ['tomorrow'] },
+    { id: 'q4', text: "I am doing my homework right now.", keywords: ['right', 'now'] },
+    { id: 'q5', text: "He went to the zoo yesterday.", keywords: ['yesterday'] },
+    { id: 'q6', text: "Look! The monkey is eating a banana.", keywords: ['look'] },
+    { id: 'q7', text: "We will travel to Paris next week.", keywords: ['next', 'week'] },
+    { id: 'q8', text: "She has already finished her project.", keywords: ['already'] },
+    { id: 'q9', text: "I always brush my teeth in the morning.", keywords: ['always'] },
+    { id: 'q10', text: "They watched a great movie last night.", keywords: ['last', 'night'] }
 ];
 
 export default function KeywordScannerGame() {

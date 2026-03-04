@@ -17,6 +17,12 @@ const CARDS: Flashcard[] = [
     { id: 'f2', front: 'Always', backTitle: 'Hiện Tại Đơn', backDesc: 'Luôn luôn, thường xuyên' },
     { id: 'f3', front: 'Tomorrow', backTitle: 'Tương Lai Đơn', backDesc: 'Ngày mai' },
     { id: 'f4', front: 'Since 2010', backTitle: 'Hiện Tại Hoàn Thành', backDesc: 'Từ năm 2010 đến nay' },
+    { id: 'f5', front: 'Right now', backTitle: 'Hiện Tại Tiếp Diễn', backDesc: 'Ngay lúc này' },
+    { id: 'f6', front: 'Next week', backTitle: 'Tương Lai Đơn', backDesc: 'Tuần tới' },
+    { id: 'f7', front: 'Last night', backTitle: 'Quá Khứ Đơn', backDesc: 'Tối qua' },
+    { id: 'f8', front: 'Usually', backTitle: 'Hiện Tại Đơn', backDesc: 'Thường xuyên' },
+    { id: 'f9', front: 'For 3 years', backTitle: 'Hiện Tại Hoàn Thành', backDesc: 'Khoảng thời gian (3 năm)' },
+    { id: 'f10', front: 'At 8 PM yesterday', backTitle: 'Quá Khứ Tiếp Diễn', backDesc: 'Tại 1 thời điểm cụ thể ở QK' }
 ];
 
 export default function MagicCardsGame() {

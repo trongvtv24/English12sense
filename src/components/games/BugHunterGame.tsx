@@ -32,6 +32,36 @@ const LEVEL_DATA: BugSentence[] = [
             { text: "park", isBug: false, fix: "" },
             { text: "yesterday.", isBug: false, fix: "" }
         ]
+    },
+    {
+        id: 'b3',
+        words: [
+            { text: "Look!", isBug: false, fix: "" },
+            { text: "She", isBug: false, fix: "" },
+            { text: "sing", isBug: true, fix: "is singing" },
+            { text: "a", isBug: false, fix: "" },
+            { text: "song.", isBug: false, fix: "" }
+        ]
+    },
+    {
+        id: 'b4',
+        words: [
+            { text: "I", isBug: false, fix: "" },
+            { text: "have", isBug: false, fix: "" },
+            { text: "went", isBug: true, fix: "gone" },
+            { text: "to", isBug: false, fix: "" },
+            { text: "Paris.", isBug: false, fix: "" }
+        ]
+    },
+    {
+        id: 'b5',
+        words: [
+            { text: "They", isBug: false, fix: "" },
+            { text: "will", isBug: false, fix: "" },
+            { text: "playing", isBug: true, fix: "play" },
+            { text: "football", isBug: false, fix: "" },
+            { text: "tomorrow.", isBug: false, fix: "" }
+        ]
     }
 ];
 

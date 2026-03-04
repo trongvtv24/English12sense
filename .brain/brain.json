@@ -1,0 +1,102 @@
+{
+    "meta": {
+        "schema_version": "1.1.0",
+        "awf_version": "3.3.0"
+    },
+    "project": {
+        "name": "English Tenses App",
+        "type": "Web Application (Gamification)",
+        "status": "completed",
+        "description": "Ứng dụng tương tác giúp trẻ em 9 tuổi học 12 thì tiếng Anh thông qua Gamification (Trò chơi hóa) và trực quan hóa (Timeline)."
+    },
+    "tech_stack": {
+        "frontend": {
+            "framework": "Next.js 16.1.6 (App Router)",
+            "language": "TypeScript",
+            "animations": "Framer Motion",
+            "styling": "Tailwind CSS + Custom CSS (3D perspective)"
+        },
+        "backend": {
+            "auth_and_db": "Supabase"
+        },
+        "database": {
+            "type": "PostgreSQL",
+            "provider": "Supabase"
+        },
+        "state_management": {
+            "global": "Zustand"
+        }
+    },
+    "database_schema": {
+        "summary": "App lưu thông tin profile của bé (tên, avatar, điểm, level), điểm từng lần chơi game, và trạng thái học thẻ từ vựng (flashcard).",
+        "tables": [
+            {
+                "name": "profiles",
+                "columns": [
+                    "id",
+                    "display_name",
+                    "avatar_url",
+                    "current_level",
+                    "total_stars",
+                    "created_at"
+                ]
+            },
+            {
+                "name": "game_scores",
+                "columns": [
+                    "id",
+                    "user_id",
+                    "game_type",
+                    "score",
+                    "max_combo",
+                    "created_at"
+                ]
+            },
+            {
+                "name": "flashcard_progress",
+                "columns": [
+                    "id",
+                    "user_id",
+                    "card_id",
+                    "memory_level",
+                    "next_review_date",
+                    "updated_at"
+                ]
+            }
+        ],
+        "relationships_explained": "1 profile (bảng profiles kế thừa auth.users) có thể có nhiều game_scores và nhiều bản ghi flashcard_progress."
+    },
+    "api_endpoints": [
+        {
+            "path": "Supabase Client SDK",
+            "explained": "Ứng dụng không viết API JSON rời mà sử dụng thư viện @supabase/supabase-js để tương tác trực tiếp với Database theo chuẩn RLS (Row Level Security)."
+        }
+    ],
+    "business_rules": [
+        "Việc học được tổ chức mốc thời gian: Timeline (Trục hiện tại, quá khứ, tương lai).",
+        "Gamification: User chơi game bắt buộc phải sử dụng dữ liệu là 'Từ khóa nhận biết' (Clue words) của các thì để rèn luyện phản xạ thay vì học vẹt công thức.",
+        "State Game: Sử dụng global state (Zustand) để thông tuyến dữ liệu số điểm và level qua lại giữa Component ArcadeZone (nơi chứa 6 minigame) và Header."
+    ],
+    "features": [
+        "Interactive Timeline (Cuộn kéo thả, mở khóa thì).",
+        "Time Basket Game (Kéo thả từ).",
+        "Keyword Scanner Game (Gạch chân từ khóa).",
+        "Magic Cards Game (Lật thẻ 3D).",
+        "Space Shooter Game (Quick Quiz).",
+        "Bug Hunter Game (Xác định lỗi câu).",
+        "Sentence Builder Game (Sắp xếp câu).",
+        "Hệ thống Audio Effect tự tạo sinh không cần file mp3."
+    ],
+    "knowledge_items": {
+        "patterns": [
+            "Sử dụng Framer Motion `Reorder` cho component drag and drop sắp xếp List.",
+            "Sử dụng Web Audio API (thông qua custom hook `useAudioEffects`) để giả lập âm thanh Bíp/Pop mà không phụ thuộc file assets."
+        ],
+        "gotchas": [
+            "Khó khăn khi xử lý drag-and-drop song song kéo thanh cuộn. Cần `dragConstraints` và `dragElastic` hợp lý trong Framer Motion."
+        ],
+        "conventions": [
+            "Quản lý state UI bằng React `useState`, quản lý Score/Level toàn cục bằng `Zustand` store module."
+        ]
+    }
+}

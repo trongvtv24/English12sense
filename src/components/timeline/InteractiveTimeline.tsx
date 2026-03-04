@@ -4,6 +4,7 @@ import React, { useRef, useState, useEffect } from 'react';
 import { motion, useScroll, useTransform, useMotionValue, useSpring } from 'framer-motion';
 import { tensesData, TenseData } from '@/data/tensesData';
 import { Lock, Navigation } from 'lucide-react';
+import HintButton from '../ui/HintButton';
 
 export default function InteractiveTimeline() {
     const containerRef = useRef<HTMLDivElement>(null);
@@ -42,6 +43,23 @@ export default function InteractiveTimeline() {
             <div className="fixed bottom-8 left-1/2 -translate-x-1/2 bg-slate-900/60 backdrop-blur-md text-white px-6 py-3 rounded-full font-bold z-40 flex items-center gap-2 shadow-xl pointer-events-none">
                 <Navigation className="animate-bounce" size={20} />
                 <span>Giữ chuột và kéo để khám phá Trục Thời Gian!</span>
+            </div>
+
+            {/* Hint Button */}
+            <div className="absolute top-6 right-6 z-50">
+                <HintButton
+                    title="Bí Kíp Trục Thời Gian 📜"
+                    description={
+                        <div className="space-y-4">
+                            <p>🌟 <b>Nhiệm vụ của bé:</b> Khám phá thế giới của 12 Thì trong tiếng Anh!</p>
+                            <ul className="list-disc pl-5 space-y-2">
+                                <li><b>Kéo cuộn trang</b> sang hai bên để du hành qua các Vùng (Quá khứ, Hiện tại, Tương lai).</li>
+                                <li><b>Nhấn vào các Hành Tinh (Vòng tròn)</b> để xem chi tiết ví dụ và câu thần chú nhận biết của Thì đó.</li>
+                                <li><b>Hành Tinh Bí Ẩn 🔒:</b> Một số thì đang bị khóa! Bé cần ấn nút vào <b>Khu Vui Chơi</b> bên dưới để chơi Game, kiếm sao mở khóa nhé!</li>
+                            </ul>
+                        </div>
+                    }
+                />
             </div>
 
             {/* Draggable Timeline Container */}

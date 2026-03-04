@@ -1,56 +1,61 @@
 {
-  "updated_at": "2026-03-04T04:53:11.386Z",
+  "updated_at": "2026-03-04T12:05:00Z",
   "working_on": {
-    "feature": "Project Completed",
-    "task": "All phases done",
-    "status": "done"
+    "feature": "Dự án Hoàn Thành",
+    "task": "N/A - Project Finished",
+    "status": "done",
+    "files": [],
+    "blockers": [],
+    "notes": "Dự án đã build thành công và mã nguồn đã được đẩy lên Github."
   },
   "pending_tasks": [
     {
-      "task": "Phase 03: Core UI & Timeline Module",
-      "priority": "high",
-      "notes": "Chờ User chạy schema.sql xong thì bắt tay làm"
+      "task": "Deploy lên Vercel",
+      "priority": "low",
+      "notes": "User tự thao tác qua trang web Vercel.com sử dụng mã nguồn Github."
     },
     {
-      "task": "Phase 04, 05, 06",
-      "priority": "medium",
-      "notes": "Quy hoạch trên Trello board/Plan.md"
+      "task": "Thêm dữ liệu câu hỏi",
+      "priority": "low",
+      "notes": "Mở rộng ngân hàng câu hỏi, keyword cho 6 trò chơi từ các file JSON trong tương lai."
     }
   ],
   "recent_changes": [
     {
-      "timestamp": "2026-03-03T16:21",
+      "timestamp": "2026-03-04T11:45:00Z",
       "type": "feature",
-      "description": "Tạo Next.js project với Tailwind, set alias",
+      "description": "Tích hợp Game Bắn Tàu, Thợ Săn Bắt Bọ, Xây Cầu Qua Sông với Zustand Global State.",
       "files": [
-        "package.json"
+        "src/components/ArcadeZone.tsx",
+        "src/components/games/SpaceShooterGame.tsx",
+        "src/components/games/BugHunterGame.tsx",
+        "src/components/games/SentenceBuilderGame.tsx"
       ]
     },
     {
-      "timestamp": "2026-03-03T16:25",
-      "type": "config",
-      "description": "Lưu file Supabase.sql + 3 file helpers client/server",
+      "timestamp": "2026-03-04T11:55:00Z",
+      "type": "feature",
+      "description": "Thêm hiệu ứng âm thanh API (Web Audio).",
       "files": [
-        "supabase/schema.sql",
-        "src/lib/supabase/*"
+        "src/lib/useAudioEffects.ts"
       ]
     }
   ],
   "errors_encountered": [
     {
-      "error": "Chạy npx create-next bị kẹt do folder không trống",
-      "solution": "Move file html và folder plan vào thư mục docs/ trước khi create-next-app",
+      "error": "Framer Motion drag-and-drop conflict với exit transition.",
+      "solution": "Bỏ `exit` transition không cần thiết trong AnimatePresence khi dùng infinite repeat animation.",
       "resolved": true
     }
   ],
   "decisions_made": [
     {
-      "decision": "Dùng Next.js App Router mượt hơn",
-      "reason": "Dễ kết nối @supabase/ssr"
+      "decision": "Dùng Supabase thay vì build API riêng biệt.",
+      "reason": "Ứng dụng Frontend nặng (Zustand, Tailwind, Framer Motion), sử dụng BaaS để đẩy nhanh quá trình dev và quản lý State real-time."
     },
     {
-      "decision": "Timeline dạng Kéo thả chuột ngang thay vì Scroll dọc",
-      "reason": "Timeline ngang chia 3 mốc quen thuộc với não bộ của bé 9 tuổi hơn"
+      "decision": "Web Audio API",
+      "reason": "Tự tạo nhạc synth bip/pop thay vì load mp3 từ Cloudinary/S3 để tránh độ trễ."
     }
   ]
 }

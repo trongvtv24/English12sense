@@ -18,6 +18,15 @@ const INITIAL_WORDS: WordCard[] = [
     { id: 'w4', word: 'Last week', correctZone: 'PAST' },
     { id: 'w5', word: 'Right now', correctZone: 'PRESENT' },
     { id: 'w6', word: 'Next year', correctZone: 'FUTURE' },
+    { id: 'w7', word: 'Two days ago', correctZone: 'PAST' },
+    { id: 'w8', word: 'Usually', correctZone: 'PRESENT' },
+    { id: 'w9', word: 'In 2050', correctZone: 'FUTURE' },
+    { id: 'w10', word: 'In 1990', correctZone: 'PAST' },
+    { id: 'w11', word: 'At the moment', correctZone: 'PRESENT' },
+    { id: 'w12', word: 'Next Monday', correctZone: 'FUTURE' },
+    { id: 'w13', word: 'Recently', correctZone: 'PAST' },
+    { id: 'w14', word: 'Often', correctZone: 'PRESENT' },
+    { id: 'w15', word: 'In the future', correctZone: 'FUTURE' }
 ];
 
 export default function TimeBasketGame() {
@@ -26,18 +35,24 @@ export default function TimeBasketGame() {
     const addScore = useGameStore(state => state.addScore);
 
     const handleDragEnd = (event: any, word: WordCard) => {
-        const { point } = event;
+        const { point } = event; // point.x, point.y is page-relative in Framer Motion
         const dropZones = document.querySelectorAll('.drop-zone');
 
         let droppedZoneId: string | null = null;
 
         dropZones.forEach(zone => {
             const rect = zone.getBoundingClientRect();
+            // Convert rect to page-relative coordinates
+            const zoneLeft = rect.left + window.scrollX;
+            const zoneRight = rect.right + window.scrollX;
+            const zoneTop = rect.top + window.scrollY;
+            const zoneBottom = rect.bottom + window.scrollY;
+
             if (
-                point.x >= rect.left &&
-                point.x <= rect.right &&
-                point.y >= rect.top &&
-                point.y <= rect.bottom
+                point.x >= zoneLeft &&
+                point.x <= zoneRight &&
+                point.y >= zoneTop &&
+                point.y <= zoneBottom
             ) {
                 droppedZoneId = zone.getAttribute('data-zone');
             }
@@ -53,7 +68,7 @@ export default function TimeBasketGame() {
                     setFeedback(null);
                 }, 800);
             } else {
-                // Incorrect - it will snap back automatically due to dragSnapToOrigin
+                // Incorrect
                 setFeedback({ id: word.id, isCorrect: false });
                 setTimeout(() => setFeedback(null), 800);
             }

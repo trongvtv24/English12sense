@@ -22,6 +22,21 @@ const PUZZLES: SentencePuzzle[] = [
         id: 'p2',
         correctOrder: ['She', 'went', 'to', 'school', 'yesterday'],
         jumbledOrder: ['yesterday', 'to', 'She', 'went', 'school']
+    },
+    {
+        id: 'p3',
+        correctOrder: ['We', 'will', 'go', 'camping', 'tomorrow'],
+        jumbledOrder: ['go', 'tomorrow', 'We', 'camping', 'will']
+    },
+    {
+        id: 'p4',
+        correctOrder: ['They', 'have', 'lived', 'here', 'since', '2010'],
+        jumbledOrder: ['since', 'They', 'lived', '2010', 'here', 'have']
+    },
+    {
+        id: 'p5',
+        correctOrder: ['He', 'always', 'brushes', 'his', 'teeth'],
+        jumbledOrder: ['his', 'always', 'brushes', 'He', 'teeth']
     }
 ];
 

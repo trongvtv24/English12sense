@@ -3,6 +3,7 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Gamepad2, X, Bug, Blocks } from 'lucide-react';
+import HintButton from './ui/HintButton';
 
 // Import Games
 import TimeBasketGame from './games/TimeBasketGame';
@@ -29,7 +30,24 @@ export default function ArcadeZone() {
                         exit={{ opacity: 0, scale: 0.95 }}
                         className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
                     >
-                        <div className="col-span-full mb-8 text-center">
+                        <div className="col-span-full mb-8 text-center relative">
+                            <div className="absolute right-0 top-0">
+                                <HintButton
+                                    title="Khu Vui Chơi Kỳ Diệu 🎪"
+                                    description={
+                                        <div className="space-y-3">
+                                            <p>Chào mừng bé đến với Khu Vui Chơi! Nơi đây có 6 trò chơi thú vị giúp bé rèn luyện phản xạ:</p>
+                                            <ul className="list-disc pl-5 space-y-2">
+                                                <li>Mỗi khi trả lời đúng trong Game, bé sẽ được cộng <b>Sao</b>.</li>
+                                                <li>Sao giúp bé đạt được cấp độ cao hơn và <b>Mở khóa</b> các Hành Tinh bị khóa ngoài Trục Thời Gian.</li>
+                                                <li>Thoát game giữa chừng sẽ không bị mất điểm đâu nhé!</li>
+                                            </ul>
+                                            <p className="text-amber-600 font-bold mt-2">Bé đã sẵn sàng chưa? Chọn một game và bắt đầu ngay!</p>
+                                        </div>
+                                    }
+                                />
+                            </div>
+
                             <h2 className="text-4xl font-black text-slate-800 flex items-center justify-center gap-3">
                                 <span className="text-5xl text-purple-500"><Gamepad2 size={48} /></span> Khu Vui Chơi
                             </h2>
