@@ -77,7 +77,7 @@ export default function ArcadeZone() {
                         >
                             <div className="w-24 h-24 bg-amber-100 rounded-full flex items-center justify-center text-5xl mb-4 group-hover:scale-110 transition-transform">🔍</div>
                             <h3 className="text-2xl font-black text-slate-800 mb-2">Máy Quét Dấu Hiệu</h3>
-                            <p className="text-slate-500 font-bold">Luyện mắt tinh tường để tìm ra các "thần chú" ẩn trong câu.</p>
+                            <p className="text-slate-500 font-bold">Luyện mắt tinh tường để tìm ra các &quot;thần chú&quot; ẩn trong câu.</p>
                         </motion.div>
 
                         {/* Game 3 Card */}
@@ -162,6 +162,6 @@ export default function ArcadeZone() {
                 )}
             </AnimatePresence>
 
-        </div>
+        </div >
     );
 }

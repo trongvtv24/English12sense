@@ -171,7 +171,7 @@ export default function BugHunterGame() {
                     <span className="text-4xl text-rose-500"><Bug size={40} /></span> Thợ Săn Bắt Bọ
                 </h2>
                 <p className="text-emerald-600 font-bold mt-2 text-lg">
-                    Có một con "bọ ngữ pháp" đang ẩn nấp trong câu! Hãy tìm và đập nó!
+                    Có một con &quot;bọ ngữ pháp&quot; đang ẩn nấp trong câu! Hãy tìm và đập nó!
                 </p>
             </div>
 
