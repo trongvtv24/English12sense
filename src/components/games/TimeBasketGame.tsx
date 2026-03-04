@@ -5,49 +5,56 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { useGameStore } from '@/lib/store';
 import { CheckCircle2, XCircle } from 'lucide-react';
 
+type TenseCategory =
+    | 'Present Simple'
+    | 'Present Continuous'
+    | 'Present Perfect'
+    | 'Past Simple'
+    | 'Past Continuous'
+    | 'Past Perfect'
+    | 'Future Simple';
+
 interface WordCard {
     id: string;
     word: string;
-    correctZone: 'PAST' | 'PRESENT' | 'FUTURE';
+    correctZone: TenseCategory;
 }
 
 const INITIAL_WORDS: WordCard[] = [
-    // --- PAST ZONE ---
-    { id: 'w1', word: 'Yesterday', correctZone: 'PAST' },
-    { id: 'w2', word: 'Last week', correctZone: 'PAST' },
-    { id: 'w3', word: 'Two days ago', correctZone: 'PAST' },
-    { id: 'w4', word: 'In 1990', correctZone: 'PAST' },
-    { id: 'w5', word: 'Recently', correctZone: 'PAST' },
-    { id: 'w6', word: 'Last night', correctZone: 'PAST' },
-    { id: 'w7', word: 'When I was young', correctZone: 'PAST' },
-    { id: 'w8', word: 'Last year', correctZone: 'PAST' },
-    { id: 'w9', word: 'Before', correctZone: 'PAST' },
-    { id: 'w10', word: 'The other day', correctZone: 'PAST' },
+    // Present Simple
+    { id: 't1', word: 'Always', correctZone: 'Present Simple' },
+    { id: 't2', word: 'Usually', correctZone: 'Present Simple' },
+    { id: 't3', word: 'Every day', correctZone: 'Present Simple' },
 
-    // --- PRESENT ZONE ---
-    { id: 'w11', word: 'Always', correctZone: 'PRESENT' },
-    { id: 'w12', word: 'Usually', correctZone: 'PRESENT' },
-    { id: 'w13', word: 'Every day', correctZone: 'PRESENT' },
-    { id: 'w14', word: 'Right now', correctZone: 'PRESENT' },
-    { id: 'w15', word: 'At the moment', correctZone: 'PRESENT' },
-    { id: 'w16', word: 'Look!', correctZone: 'PRESENT' },
-    { id: 'w17', word: 'Listen!', correctZone: 'PRESENT' },
-    { id: 'w18', word: 'Often', correctZone: 'PRESENT' },
-    { id: 'w19', word: 'Sometimes', correctZone: 'PRESENT' },
-    { id: 'w20', word: 'Nowadays', correctZone: 'PRESENT' },
-    { id: 'w21', word: 'Currently', correctZone: 'PRESENT' },
+    // Present Continuous
+    { id: 't4', word: 'Right now', correctZone: 'Present Continuous' },
+    { id: 't5', word: 'At the moment', correctZone: 'Present Continuous' },
+    { id: 't6', word: 'Look!', correctZone: 'Present Continuous' },
 
-    // --- FUTURE ZONE ---
-    { id: 'w22', word: 'Tomorrow', correctZone: 'FUTURE' },
-    { id: 'w23', word: 'Next year', correctZone: 'FUTURE' },
-    { id: 'w24', word: 'In 2050', correctZone: 'FUTURE' },
-    { id: 'w25', word: 'Next Monday', correctZone: 'FUTURE' },
-    { id: 'w26', word: 'In the future', correctZone: 'FUTURE' },
-    { id: 'w27', word: 'Soon', correctZone: 'FUTURE' },
-    { id: 'w28', word: 'Later', correctZone: 'FUTURE' },
-    { id: 'w29', word: 'Next month', correctZone: 'FUTURE' },
-    { id: 'w30', word: 'Next week', correctZone: 'FUTURE' },
-    { id: 'w31', word: 'By tomorrow', correctZone: 'FUTURE' }
+    // Present Perfect
+    { id: 't7', word: 'Just', correctZone: 'Present Perfect' },
+    { id: 't8', word: 'Already', correctZone: 'Present Perfect' },
+    { id: 't9', word: 'Since 2010', correctZone: 'Present Perfect' },
+
+    // Past Simple
+    { id: 't10', word: 'Yesterday', correctZone: 'Past Simple' },
+    { id: 't11', word: 'Last week', correctZone: 'Past Simple' },
+    { id: 't12', word: 'Two days ago', correctZone: 'Past Simple' },
+
+    // Past Continuous
+    { id: 't13', word: 'At 8 PM yesterday', correctZone: 'Past Continuous' },
+    { id: 't14', word: 'While', correctZone: 'Past Continuous' },
+    { id: 't15', word: 'When (in past)', correctZone: 'Past Continuous' },
+
+    // Past Perfect
+    { id: 't16', word: 'By the time', correctZone: 'Past Perfect' },
+    { id: 't17', word: 'Before (in past)', correctZone: 'Past Perfect' },
+    { id: 't18', word: 'After (in past)', correctZone: 'Past Perfect' },
+
+    // Future Simple / Near Future
+    { id: 't19', word: 'Tomorrow', correctZone: 'Future Simple' },
+    { id: 't20', word: 'Next year', correctZone: 'Future Simple' },
+    { id: 't21', word: 'I think', correctZone: 'Future Simple' }
 ];
 
 export default function TimeBasketGame() {
@@ -56,14 +63,13 @@ export default function TimeBasketGame() {
     const addScore = useGameStore(state => state.addScore);
 
     const handleDragEnd = (event: any, word: WordCard) => {
-        const { point } = event; // point.x, point.y is page-relative in Framer Motion
+        const { point } = event;
         const dropZones = document.querySelectorAll('.drop-zone');
 
         let droppedZoneId: string | null = null;
 
         dropZones.forEach(zone => {
             const rect = zone.getBoundingClientRect();
-            // Convert rect to page-relative coordinates
             const zoneLeft = rect.left + window.scrollX;
             const zoneRight = rect.right + window.scrollX;
             const zoneTop = rect.top + window.scrollY;
@@ -97,31 +103,38 @@ export default function TimeBasketGame() {
     };
 
     return (
-        <div className="w-full max-w-4xl mx-auto p-6 bg-white rounded-[2rem] shadow-xl border-4 border-slate-100">
-            <div className="text-center mb-8">
+        <div className="w-full max-w-6xl mx-auto p-6 bg-white rounded-[2rem] shadow-xl border-4 border-slate-100">
+            <div className="text-center mb-6">
                 <h2 className="text-3xl font-black text-slate-800 flex items-center justify-center gap-3">
                     <span className="text-4xl">🧺</span> Rổ Thời Gian Kỳ Diệu
                 </h2>
                 <p className="text-slate-500 font-bold mt-2 text-lg">
-                    Kéo thả các từ khóa thần chú vào đúng chiếc rổ của vùng thời gian tương ứng nhé!
+                    Kéo thả các Dấu hiệu thần chú vào ĐÚNG rổ của 7 Thì tương ứng nhé!
                 </p>
             </div>
 
-            {/* The Baskets (Drop Zones) */}
-            <div className="grid grid-cols-3 gap-6 mb-12">
-                <div data-zone="PAST" className="drop-zone h-48 rounded-[2rem] bg-red-100 border-4 border-red-300 border-dashed flex flex-col items-center justify-center relative overflow-hidden transition-colors">
-                    <span className="text-5xl mb-2">🦕</span>
-                    <span className="font-black text-red-800 uppercase tracking-widest bg-white/50 px-4 py-1 rounded-full">Quá Khứ</span>
+            {/* The Baskets (7 Drop Zones) */}
+            <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
+                <div data-zone="Present Simple" className="drop-zone h-36 rounded-2xl bg-green-50 border-4 border-green-300 border-dashed flex flex-col items-center justify-center relative transition-colors">
+                    <span className="font-black text-green-800 text-center px-2">Hiện Tại Đơn</span>
                 </div>
-
-                <div data-zone="PRESENT" className="drop-zone h-48 rounded-[2rem] bg-green-100 border-4 border-green-300 border-dashed flex flex-col items-center justify-center relative overflow-hidden transition-colors">
-                    <span className="text-5xl mb-2">🧸</span>
-                    <span className="font-black text-green-800 uppercase tracking-widest bg-white/50 px-4 py-1 rounded-full">Hiện Tại</span>
+                <div data-zone="Present Continuous" className="drop-zone h-36 rounded-2xl bg-emerald-50 border-4 border-emerald-300 border-dashed flex flex-col items-center justify-center relative transition-colors">
+                    <span className="font-black text-emerald-800 text-center px-2">Hiện Tại <br /> Tiếp Diễn</span>
                 </div>
-
-                <div data-zone="FUTURE" className="drop-zone h-48 rounded-[2rem] bg-sky-100 border-4 border-sky-300 border-dashed flex flex-col items-center justify-center relative overflow-hidden transition-colors">
-                    <span className="text-5xl mb-2">🚀</span>
-                    <span className="font-black text-sky-800 uppercase tracking-widest bg-white/50 px-4 py-1 rounded-full">Tương Lai</span>
+                <div data-zone="Present Perfect" className="drop-zone h-36 rounded-2xl bg-teal-50 border-4 border-teal-300 border-dashed flex flex-col items-center justify-center relative transition-colors">
+                    <span className="font-black text-teal-800 text-center px-2">Hiện Tại <br /> Hoàn Thành</span>
+                </div>
+                <div data-zone="Past Simple" className="drop-zone h-36 rounded-2xl bg-red-50 border-4 border-red-300 border-dashed flex flex-col items-center justify-center relative transition-colors">
+                    <span className="font-black text-red-800 text-center px-2">Quá Khứ Đơn</span>
+                </div>
+                <div data-zone="Past Continuous" className="drop-zone h-36 rounded-2xl bg-rose-50 border-4 border-rose-300 border-dashed flex flex-col items-center justify-center relative transition-colors">
+                    <span className="font-black text-rose-800 text-center px-2">Quá Khứ <br /> Tiếp Diễn</span>
+                </div>
+                <div data-zone="Past Perfect" className="drop-zone h-36 rounded-2xl bg-orange-50 border-4 border-orange-300 border-dashed flex flex-col items-center justify-center relative transition-colors">
+                    <span className="font-black text-orange-800 text-center px-2">Quá Khứ <br /> Hoàn Thành</span>
+                </div>
+                <div data-zone="Future Simple" className="drop-zone h-36 rounded-2xl bg-sky-50 border-4 border-sky-300 border-dashed flex flex-col items-center justify-center relative transition-colors lg:col-span-2">
+                    <span className="font-black text-sky-800 text-center px-2">Tương Lai Đơn</span>
                 </div>
             </div>
 
