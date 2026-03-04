@@ -1,0 +1,56 @@
+{
+  "updated_at": "2026-03-04T04:53:11.386Z",
+  "working_on": {
+    "feature": "Project Completed",
+    "task": "All phases done",
+    "status": "done"
+  },
+  "pending_tasks": [
+    {
+      "task": "Phase 03: Core UI & Timeline Module",
+      "priority": "high",
+      "notes": "Chờ User chạy schema.sql xong thì bắt tay làm"
+    },
+    {
+      "task": "Phase 04, 05, 06",
+      "priority": "medium",
+      "notes": "Quy hoạch trên Trello board/Plan.md"
+    }
+  ],
+  "recent_changes": [
+    {
+      "timestamp": "2026-03-03T16:21",
+      "type": "feature",
+      "description": "Tạo Next.js project với Tailwind, set alias",
+      "files": [
+        "package.json"
+      ]
+    },
+    {
+      "timestamp": "2026-03-03T16:25",
+      "type": "config",
+      "description": "Lưu file Supabase.sql + 3 file helpers client/server",
+      "files": [
+        "supabase/schema.sql",
+        "src/lib/supabase/*"
+      ]
+    }
+  ],
+  "errors_encountered": [
+    {
+      "error": "Chạy npx create-next bị kẹt do folder không trống",
+      "solution": "Move file html và folder plan vào thư mục docs/ trước khi create-next-app",
+      "resolved": true
+    }
+  ],
+  "decisions_made": [
+    {
+      "decision": "Dùng Next.js App Router mượt hơn",
+      "reason": "Dễ kết nối @supabase/ssr"
+    },
+    {
+      "decision": "Timeline dạng Kéo thả chuột ngang thay vì Scroll dọc",
+      "reason": "Timeline ngang chia 3 mốc quen thuộc với não bộ của bé 9 tuổi hơn"
+    }
+  ]
+}
