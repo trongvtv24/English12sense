@@ -1,9 +1,9 @@
 "use client";
 
 import React, { useRef, useState, useEffect } from 'react';
-import { motion, useScroll, useTransform, useMotionValue, useSpring } from 'framer-motion';
+import { motion } from 'framer-motion';
 import { tensesData, TenseData } from '@/data/tensesData';
-import { Lock, Navigation, Star, Trophy } from 'lucide-react';
+import { Lock, Navigation } from 'lucide-react';
 import { useGameStore } from '@/lib/store';
 import HintButton from '../ui/HintButton';
 
@@ -14,9 +14,8 @@ export default function InteractiveTimeline() {
     const [lockedAttemptTense, setLockedAttemptTense] = useState<TenseData | null>(null);
     const { level } = useGameStore();
 
-    const unlockedCount = tensesData.filter(t => level >= (t.requiredLevel || 1)).length;
-    const totalTenses = tensesData.length;
-    const isFullyUnlocked = unlockedCount === totalTenses;
+    // removed isFullyUnlocked unused var and unlockedCount
+    // removed totalTenses unused var
 
     // Auto scroll to present zone on mount
     useEffect(() => {

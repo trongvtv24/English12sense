@@ -1,0 +1,86 @@
+C:\Users\Administrator\.gemini\antigravity\scratch\english-tenses-app\src\components\ArcadeZone.tsx
+80: `"` can be escaped with `&quot;`, `&ldquo;`, `&#34;`, `&rdquo;`.
+80: `"` can be escaped with `&quot;`, `&ldquo;`, `&#34;`, `&rdquo;`.
+C:\Users\Administrator\.gemini\antigravity\scratch\english-tenses-app\src\components\games\BugHunterGame.tsx
+174: `"` can be escaped with `&quot;`, `&ldquo;`, `&#34;`, `&rdquo;`.
+174: `"` can be escaped with `&quot;`, `&ldquo;`, `&#34;`, `&rdquo;`.
+C:\Users\Administrator\.gemini\antigravity\scratch\english-tenses-app\src\components\games\KeywordScannerGame.tsx
+95: `"` can be escaped with `&quot;`, `&ldquo;`, `&#34;`, `&rdquo;`.
+95: `"` can be escaped with `&quot;`, `&ldquo;`, `&#34;`, `&rdquo;`.
+C:\Users\Administrator\.gemini\antigravity\scratch\english-tenses-app\src\components\games\SpaceShooterGame.tsx
+69: Error: Cannot access variable before it is declared
+
+`handleTimeout` is accessed before it is declared, which prevents the earlier access from updating when this value changes over time.
+
+C:\Users\Administrator\.gemini\antigravity\scratch\english-tenses-app\src\components\games\SpaceShooterGame.tsx:69:13
+  67 |
+  68 |         if (timeLeft <= 0) {
+> 69 |             handleTimeout();
+     |             ^^^^^^^^^^^^^ `handleTimeout` accessed before it is declared
+  70 |             return;
+  71 |         }
+  72 |
+
+C:\Users\Administrator\.gemini\antigravity\scratch\english-tenses-app\src\components\games\SpaceShooterGame.tsx:87:5
+  85 |     };
+  86 |
+> 87 |     const handleTimeout = () => {
+     |     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 88 |         setFeedback('MISS');
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 89 |         playSound('ERROR');
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 90 |         setTimeout(() => nextRound(), 1500);
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 91 |     };
+     | ^^^^^^^ `handleTimeout` is declared here
+  92 |
+  93 |     const handleShoot = (selectedOption: string) => {
+  94 |         if (feedback !== 'IDLE') return;
+78: React Hook useEffect has a missing dependency: 'handleTimeout'. Either include it or remove the dependency array.
+129: Error: Cannot call impure function during render
+
+`Math.random` is an impure function. Calling an impure function can produce unstable results that update unpredictably when the component happens to re-render. (https://react.dev/reference/rules/components-and-hooks-must-be-pure#components-and-hooks-must-be-idempotent).
+
+C:\Users\Administrator\.gemini\antigravity\scratch\english-tenses-app\src\components\games\SpaceShooterGame.tsx:129:37
+  127 |                     <div key={i} className="absolute bg-white rounded-full w-1 h-1 animate-pulse"
+  128 |                         style={{
+> 129 |                             top: `${Math.random() * 100}%`,
+      |                                     ^^^^^^^^^^^^^ Cannot call impure function
+  130 |                             left: `${Math.random() * 100}%`,
+  131 |                             animationDelay: `${Math.random() * 2}s`
+  132 |                         }}
+130: Error: Cannot call impure function during render
+
+`Math.random` is an impure function. Calling an impure function can produce unstable results that update unpredictably when the component happens to re-render. (https://react.dev/reference/rules/components-and-hooks-must-be-pure#components-and-hooks-must-be-idempotent).
+
+C:\Users\Administrator\.gemini\antigravity\scratch\english-tenses-app\src\components\games\SpaceShooterGame.tsx:130:38
+  128 |                         style={{
+  129 |                             top: `${Math.random() * 100}%`,
+> 130 |                             left: `${Math.random() * 100}%`,
+      |                                      ^^^^^^^^^^^^^ Cannot call impure function
+  131 |                             animationDelay: `${Math.random() * 2}s`
+  132 |                         }}
+  133 |                     />
+131: Error: Cannot call impure function during render
+
+`Math.random` is an impure function. Calling an impure function can produce unstable results that update unpredictably when the component happens to re-render. (https://react.dev/reference/rules/components-and-hooks-must-be-pure#components-and-hooks-must-be-idempotent).
+
+C:\Users\Administrator\.gemini\antigravity\scratch\english-tenses-app\src\components\games\SpaceShooterGame.tsx:131:48
+  129 |                             top: `${Math.random() * 100}%`,
+  130 |                             left: `${Math.random() * 100}%`,
+> 131 |                             animationDelay: `${Math.random() * 2}s`
+      |                                                ^^^^^^^^^^^^^ Cannot call impure function
+  132 |                         }}
+  133 |                     />
+  134 |                 ))}
+C:\Users\Administrator\.gemini\antigravity\scratch\english-tenses-app\src\components\games\TimeBasketGame.tsx
+65: Unexpected any. Specify a different type.
+C:\Users\Administrator\.gemini\antigravity\scratch\english-tenses-app\src\components\timeline\InteractiveTimeline.tsx
+4: 'useScroll' is defined but never used.
+4: 'useTransform' is defined but never used.
+4: 'useMotionValue' is defined but never used.
+4: 'useSpring' is defined but never used.
+6: 'Star' is defined but never used.
+6: 'Trophy' is defined but never used.
+19: 'isFullyUnlocked' is assigned a value but never used.

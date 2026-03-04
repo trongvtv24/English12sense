@@ -1,0 +1,104 @@
+
+> english-tenses-app@0.1.0 lint
+> eslint
+
+
+C:\Users\Administrator\.gemini\antigravity\scratch\english-tenses-app\src\components\ArcadeZone.tsx
+  80:104  error  `"` can be escaped with `&quot;`, `&ldquo;`, `&#34;`, `&rdquo;`  react/no-unescaped-entities
+  80:113  error  `"` can be escaped with `&quot;`, `&ldquo;`, `&#34;`, `&rdquo;`  react/no-unescaped-entities
+
+C:\Users\Administrator\.gemini\antigravity\scratch\english-tenses-app\src\components\games\BugHunterGame.tsx
+  174:32  error  `"` can be escaped with `&quot;`, `&ldquo;`, `&#34;`, `&rdquo;`  react/no-unescaped-entities
+  174:44  error  `"` can be escaped with `&quot;`, `&ldquo;`, `&#34;`, `&rdquo;`  react/no-unescaped-entities
+
+C:\Users\Administrator\.gemini\antigravity\scratch\english-tenses-app\src\components\games\KeywordScannerGame.tsx
+  95:58  error  `"` can be escaped with `&quot;`, `&ldquo;`, `&#34;`, `&rdquo;`  react/no-unescaped-entities
+  95:77  error  `"` can be escaped with `&quot;`, `&ldquo;`, `&#34;`, `&rdquo;`  react/no-unescaped-entities
+
+C:\Users\Administrator\.gemini\antigravity\scratch\english-tenses-app\src\components\games\SpaceShooterGame.tsx
+   69:13  error    Error: Cannot access variable before it is declared
+
+`handleTimeout` is accessed before it is declared, which prevents the earlier access from updating when this value changes over time.
+
+C:\Users\Administrator\.gemini\antigravity\scratch\english-tenses-app\src\components\games\SpaceShooterGame.tsx:69:13
+  67 |
+  68 |         if (timeLeft <= 0) {
+> 69 |             handleTimeout();
+     |             ^^^^^^^^^^^^^ `handleTimeout` accessed before it is declared
+  70 |             return;
+  71 |         }
+  72 |
+
+C:\Users\Administrator\.gemini\antigravity\scratch\english-tenses-app\src\components\games\SpaceShooterGame.tsx:87:5
+  85 |     };
+  86 |
+> 87 |     const handleTimeout = () => {
+     |     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 88 |         setFeedback('MISS');
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 89 |         playSound('ERROR');
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 90 |         setTimeout(() => nextRound(), 1500);
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 91 |     };
+     | ^^^^^^^ `handleTimeout` is declared here
+  92 |
+  93 |     const handleShoot = (selectedOption: string) => {
+  94 |         if (feedback !== 'IDLE') return;  react-hooks/immutability
+   78:8   warning  React Hook useEffect has a missing dependency: 'handleTimeout'. Either include it or remove the dependency array                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           react-hooks/exhaustive-deps
+  129:37  error    Error: Cannot call impure function during render
+
+`Math.random` is an impure function. Calling an impure function can produce unstable results that update unpredictably when the component happens to re-render. (https://react.dev/reference/rules/components-and-hooks-must-be-pure#components-and-hooks-must-be-idempotent).
+
+C:\Users\Administrator\.gemini\antigravity\scratch\english-tenses-app\src\components\games\SpaceShooterGame.tsx:129:37
+  127 |                     <div key={i} className="absolute bg-white rounded-full w-1 h-1 animate-pulse"
+  128 |                         style={{
+> 129 |                             top: `${Math.random() * 100}%`,
+      |                                     ^^^^^^^^^^^^^ Cannot call impure function
+  130 |                             left: `${Math.random() * 100}%`,
+  131 |                             animationDelay: `${Math.random() * 2}s`
+  132 |                         }}                                                                                                                                                                                                                                  react-hooks/purity
+  130:38  error    Error: Cannot call impure function during render
+
+`Math.random` is an impure function. Calling an impure function can produce unstable results that update unpredictably when the component happens to re-render. (https://react.dev/reference/rules/components-and-hooks-must-be-pure#components-and-hooks-must-be-idempotent).
+
+C:\Users\Administrator\.gemini\antigravity\scratch\english-tenses-app\src\components\games\SpaceShooterGame.tsx:130:38
+  128 |                         style={{
+  129 |                             top: `${Math.random() * 100}%`,
+> 130 |                             left: `${Math.random() * 100}%`,
+      |                                      ^^^^^^^^^^^^^ Cannot call impure function
+  131 |                             animationDelay: `${Math.random() * 2}s`
+  132 |                         }}
+  133 |                     />                                                                                                                                                                                                                                                                                                            react-hooks/purity
+  131:48  error    Error: Cannot call impure function during render
+
+`Math.random` is an impure function. Calling an impure function can produce unstable results that update unpredictably when the component happens to re-render. (https://react.dev/reference/rules/components-and-hooks-must-be-pure#components-and-hooks-must-be-idempotent).
+
+C:\Users\Administrator\.gemini\antigravity\scratch\english-tenses-app\src\components\games\SpaceShooterGame.tsx:131:48
+  129 |                             top: `${Math.random() * 100}%`,
+  130 |                             left: `${Math.random() * 100}%`,
+> 131 |                             animationDelay: `${Math.random() * 2}s`
+      |                                                ^^^^^^^^^^^^^ Cannot call impure function
+  132 |                         }}
+  133 |                     />
+  134 |                 ))}                                                                                                                                                                                                                                                                                                               react-hooks/purity
+
+C:\Users\Administrator\.gemini\antigravity\scratch\english-tenses-app\src\components\games\TimeBasketGame.tsx
+  65:35  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+C:\Users\Administrator\.gemini\antigravity\scratch\english-tenses-app\src\components\timeline\InteractiveTimeline.tsx
+   4:18  warning  'useScroll' is defined but never used                 @typescript-eslint/no-unused-vars
+   4:29  warning  'useTransform' is defined but never used              @typescript-eslint/no-unused-vars
+   4:43  warning  'useMotionValue' is defined but never used            @typescript-eslint/no-unused-vars
+   4:59  warning  'useSpring' is defined but never used                 @typescript-eslint/no-unused-vars
+   6:28  warning  'Star' is defined but never used                      @typescript-eslint/no-unused-vars
+   6:34  warning  'Trophy' is defined but never used                    @typescript-eslint/no-unused-vars
+  19:11  warning  'isFullyUnlocked' is assigned a value but never used  @typescript-eslint/no-unused-vars
+
+C:\Users\Administrator\.gemini\antigravity\scratch\english-tenses-app\src\lib\useAudioEffects.ts
+   3:10  warning  'useEffect' is defined but never used     @typescript-eslint/no-unused-vars
+  10:68  error    Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  66:18  warning  'e' is defined but never used             @typescript-eslint/no-unused-vars
+
+Γ£û 22 problems (12 errors, 10 warnings)
+

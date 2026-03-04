@@ -1,7 +1,7 @@
 "use client"
 
 import React, { useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion, AnimatePresence, PanInfo } from 'framer-motion';
 import { useGameStore } from '@/lib/store';
 import { CheckCircle2, XCircle } from 'lucide-react';
 
@@ -62,8 +62,8 @@ export default function TimeBasketGame() {
     const [feedback, setFeedback] = useState<{ id: string, isCorrect: boolean } | null>(null);
     const addScore = useGameStore(state => state.addScore);
 
-    const handleDragEnd = (event: any, word: WordCard) => {
-        const { point } = event;
+    const handleDragEnd = (info: PanInfo, word: WordCard) => {
+        const { point } = info;
         const dropZones = document.querySelectorAll('.drop-zone');
 
         let droppedZoneId: string | null = null;

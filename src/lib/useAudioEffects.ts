@@ -1,12 +1,13 @@
 "use client"
 
-import { useEffect, useCallback } from 'react'
+import { useCallback } from 'react'
 
 export function useAudioEffects() {
     const playSound = useCallback((type: 'SUCCESS' | 'ERROR' | 'POP' | 'SHOOT' | 'BUG_SQUASH') => {
         // In a real app we would load actual MP3/WAV files.
         // Here we use the Web Audio API to synthesize sounds for a 0-dependency "packaging" 
         try {
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
             const AudioContext = window.AudioContext || (window as any).webkitAudioContext;
             if (!AudioContext) return;
 
@@ -63,7 +64,7 @@ export function useAudioEffects() {
                 osc.start(now);
                 osc.stop(now + 0.1);
             }
-        } catch (e) {
+        } catch {
             // ignore audio errors (e.g., if user hasn't interacted yet)
         }
     }, []);

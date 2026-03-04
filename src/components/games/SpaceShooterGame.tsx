@@ -2,64 +2,73 @@
 
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { Rocket, Target } from 'lucide-react';
 import { useGameStore } from '@/lib/store';
 import { useAudioEffects } from '@/lib/useAudioEffects';
-import { Rocket, Target } from 'lucide-react';
 
 interface QuizItem {
     id: string;
-    sentence: string; // use ___ for the blank
+    question: string;
     options: string[];
     correctAnswer: string;
+    tense: string;
 }
 
 const QUIZZES: QuizItem[] = [
-    // Hiện tại đơn
-    { id: 'sq1', sentence: "I ___ my grandparents every weekend.", options: ['visit', 'am visiting', 'visited'], correctAnswer: 'visit' },
-    { id: 'sq2', sentence: "Water ___ at 100 degrees Celsius.", options: ['boil', 'boils', 'is boiling'], correctAnswer: 'boils' },
-    { id: 'sq3', sentence: "The train ___ at 8 AM tomorrow.", options: ['leaves', 'is leaving', 'left'], correctAnswer: 'leaves' },
+    // Present Simple
+    { id: 'q1', question: 'Water ______ at 100 degrees Celsius.', options: ['boil', 'boils', 'is boiling'], correctAnswer: 'boils', tense: 'Present Simple' },
+    { id: 'q2', question: 'He ______ to the gym every morning.', options: ['go', 'goes', 'going'], correctAnswer: 'goes', tense: 'Present Simple' },
+    { id: 'q3', question: 'Cats ______ fish.', options: ['likes', 'like', 'are liking'], correctAnswer: 'like', tense: 'Present Simple' },
+    { id: 'q4', question: 'The train ______ at 6 PM.', options: ['leaves', 'leave', 'is leaving'], correctAnswer: 'leaves', tense: 'Present Simple' },
 
-    // Hiện tại tiếp diễn
-    { id: 'sq4', sentence: "Listen! The baby ___ in the bedroom.", options: ['cries', 'is crying', 'cried'], correctAnswer: 'is crying' },
-    { id: 'sq5', sentence: "We ___ for our English exam right now.", options: ['study', 'are studying', 'studied'], correctAnswer: 'are studying' },
-    { id: 'sq6', sentence: "She ___ dinner at the moment.", options: ['cooks', 'is cooking', 'has cooked'], correctAnswer: 'is cooking' },
+    // Present Continuous
+    { id: 'q5', question: 'Look! The dog ______ after the postman.', options: ['runs', 'is running', 'run'], correctAnswer: 'is running', tense: 'Present Continuous' },
+    { id: 'q6', question: 'I ______ a really good book right now.', options: ['read', 'am reading', 'reading'], correctAnswer: 'am reading', tense: 'Present Continuous' },
+    { id: 'q7', question: 'They ______ dinner at the moment.', options: ['have', 'are having', 'having'], correctAnswer: 'are having', tense: 'Present Continuous' },
 
-    // Hiện tại hoàn thành
-    { id: 'sq7', sentence: "They ___ in this city since 2015.", options: ['live', 'are living', 'have lived'], correctAnswer: 'have lived' },
-    { id: 'sq8', sentence: "I ___ three cups of coffee today.", options: ['drink', 'drank', 'have drunk'], correctAnswer: 'have drunk' },
-    { id: 'sq9', sentence: "She ___ her homework already.", options: ['finishes', 'finished', 'has finished'], correctAnswer: 'has finished' },
+    // Present Perfect
+    { id: 'q8', question: 'I ______ never ______ sushi before.', options: ['have / eaten', 'has / eaten', 'am / eating'], correctAnswer: 'have / eaten', tense: 'Present Perfect' },
+    { id: 'q9', question: 'She ______ already ______ her homework.', options: ['have / finished', 'has / finished', 'is / finishing'], correctAnswer: 'has / finished', tense: 'Present Perfect' },
+    { id: 'q10', question: 'We ______ here since 2015.', options: ['lived', 'have lived', 'are living'], correctAnswer: 'have lived', tense: 'Present Perfect' },
 
-    // Quá khứ đơn
-    { id: 'sq10', sentence: "We ___ to the beach last summer.", options: ['go', 'went', 'have gone'], correctAnswer: 'went' },
-    { id: 'sq11', sentence: "He ___ a new car two days ago.", options: ['buys', 'bought', 'has bought'], correctAnswer: 'bought' },
-    { id: 'sq12', sentence: "I ___ Mary at the park yesterday.", options: ['see', 'saw', 'have seen'], correctAnswer: 'saw' },
+    // Past Simple
+    { id: 'q11', question: 'We ______ to Paris last summer.', options: ['go', 'went', 'have gone'], correctAnswer: 'went', tense: 'Past Simple' },
+    { id: 'q12', question: 'She ______ a new car two days ago.', options: ['buys', 'bought', 'has bought'], correctAnswer: 'bought', tense: 'Past Simple' },
+    { id: 'q13', question: 'I ______ him yesterday.', options: ['see', 'saw', 'have seen'], correctAnswer: 'saw', tense: 'Past Simple' },
 
-    // Quá khứ tiếp diễn
-    { id: 'sq13', sentence: "When I called him, he ___ TV.", options: ['watched', 'was watching', 'is watching'], correctAnswer: 'was watching' },
-    { id: 'sq14', sentence: "They ___ football at 5 PM yesterday.", options: ['play', 'played', 'were playing'], correctAnswer: 'were playing' },
-    { id: 'sq15', sentence: "While I was reading, my brother ___ music.", options: ['listens', 'listened', 'was listening'], correctAnswer: 'was listening' },
+    // Past Continuous
+    { id: 'q14', question: 'I ______ TV when the phone rang.', options: ['watched', 'was watching', 'am watching'], correctAnswer: 'was watching', tense: 'Past Continuous' },
+    { id: 'q15', question: 'They ______ football at 5 PM yesterday.', options: ['played', 'were playing', 'are playing'], correctAnswer: 'were playing', tense: 'Past Continuous' },
+    { id: 'q16', question: 'While she ______, he was reading.', options: ['slept', 'was sleeping', 'sleeps'], correctAnswer: 'was sleeping', tense: 'Past Continuous' },
 
-    // Quá khứ hoàn thành
-    { id: 'sq16', sentence: "By the time we arrived, the movie ___.", options: ['starts', 'started', 'had started'], correctAnswer: 'had started' },
-    { id: 'sq17', sentence: "She ___ all the food before I came.", options: ['eats', 'ate', 'had eaten'], correctAnswer: 'had eaten' },
-    { id: 'sq18', sentence: "They ___ the report before the meeting began.", options: ['finish', 'finished', 'had finished'], correctAnswer: 'had finished' },
+    // Past Perfect
+    { id: 'q17', question: 'By the time I arrived, they ______.', options: ['left', 'had left', 'have left'], correctAnswer: 'had left', tense: 'Past Perfect' },
+    { id: 'q18', question: 'She ______ the movie before we watched it.', options: ['saw', 'had seen', 'has seen'], correctAnswer: 'had seen', tense: 'Past Perfect' },
+    { id: 'q19', question: 'I realized I ______ my keys at home.', options: ['forgot', 'had forgotten', 'forget'], correctAnswer: 'had forgotten', tense: 'Past Perfect' },
 
-    // Tương lai đơn / Gần
-    { id: 'sq19', sentence: "I think it ___ rain tomorrow.", options: ['will', 'is going to', 'rains'], correctAnswer: 'will' },
-    { id: 'sq20', sentence: "Look at those dark clouds! It ___ rain.", options: ['will', 'is going to', 'rains'], correctAnswer: 'is going to' },
-    { id: 'sq21', sentence: "Don't worry, I ___ help you with that.", options: ['will', 'am going to', 'help'], correctAnswer: 'will' },
-    { id: 'sq22', sentence: "We ___ our grandparents next week.", options: ['will visit', 'are going to visit', 'visit'], correctAnswer: 'are going to visit' }
+    // Future Simple / Near Future
+    { id: 'q20', question: 'I think it ______ rain tomorrow.', options: ['will', 'is going to', 'rains'], correctAnswer: 'will', tense: 'Future Simple' },
+    { id: 'q21', question: 'Look at those clouds! It ______ rain.', options: ['will', 'is going to', 'rains'], correctAnswer: 'is going to', tense: 'Near Future' },
+    { id: 'q22', question: 'We ______ meet tomorrow at 10 AM.', options: ['will', 'are going to', 'meet'], correctAnswer: 'will', tense: 'Future Simple' }
 ];
 
 export default function SpaceShooterGame() {
-    const [currentIdx, setCurrentIdx] = useState(0);
+    const [currentIndex, setCurrentIndex] = useState(0);
     const [isPlaying, setIsPlaying] = useState(false);
     const [timeLeft, setTimeLeft] = useState(10);
     const [feedback, setFeedback] = useState<'IDLE' | 'HIT' | 'MISS'>('IDLE');
 
     const addScore = useGameStore(state => state.addScore);
     const { playSound } = useAudioEffects();
-    const quiz = QUIZZES[currentIdx];
+
+    const [stars] = useState(() => {
+        return [...Array(20)].map(() => ({
+            top: Math.random() * 100,
+            left: Math.random() * 100,
+            delay: Math.random() * 2
+        }));
+    });
+    const quiz = QUIZZES[currentIndex];
 
     // Timer logic
     useEffect(() => {
@@ -75,6 +84,7 @@ export default function SpaceShooterGame() {
         }, 1000);
 
         return () => clearInterval(timer);
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [isPlaying, timeLeft, feedback]);
 
     const startGame = () => {
@@ -106,15 +116,15 @@ export default function SpaceShooterGame() {
     };
 
     const nextRound = () => {
-        if (currentIdx < QUIZZES.length - 1) {
-            setCurrentIdx(prev => prev + 1);
+        if (currentIndex < QUIZZES.length - 1) {
+            setCurrentIndex(prev => prev + 1);
             setTimeLeft(10);
             setFeedback('IDLE');
         } else {
             setIsPlaying(false);
             alert("Nhiệm vụ không gian thành công! 🌟");
             // Reset for replay
-            setCurrentIdx(0);
+            setCurrentIndex(0);
         }
     };
 
@@ -123,12 +133,12 @@ export default function SpaceShooterGame() {
 
             {/* Background space elements */}
             <div className="absolute inset-0 opacity-20 pointer-events-none">
-                {[...Array(20)].map((_, i) => (
+                {stars.map((star, i) => (
                     <div key={i} className="absolute bg-white rounded-full w-1 h-1 animate-pulse"
                         style={{
-                            top: `${Math.random() * 100}%`,
-                            left: `${Math.random() * 100}%`,
-                            animationDelay: `${Math.random() * 2}s`
+                            top: `${star.top}%`,
+                            left: `${star.left}%`,
+                            animationDelay: `${star.delay}s`
                         }}
                     />
                 ))}
@@ -157,7 +167,7 @@ export default function SpaceShooterGame() {
 
                     {/* Top Bar: Timer & Progress */}
                     <div className="w-full flex justify-between items-center mb-12 px-4">
-                        <span className="font-bold text-slate-400">Thiên thạch {currentIdx + 1}/{QUIZZES.length}</span>
+                        <span className="font-bold text-slate-400">Thiên thạch {currentIndex + 1}/{QUIZZES.length}</span>
                         <div className={`text-2xl font-black px-4 py-1 rounded-full ${timeLeft <= 3 ? 'bg-red-500 animate-pulse' : 'bg-slate-700'}`}>
                             ⏳ {timeLeft}s
                         </div>
@@ -189,7 +199,7 @@ export default function SpaceShooterGame() {
 
                             <Target className="absolute -top-6 -left-6 text-slate-500 opacity-50" size={48} />
                             <p className="text-2xl font-bold leading-relaxed">
-                                {quiz.sentence.split('___').map((part, i, arr) => (
+                                {quiz.question.split('___').map((part: string, i: number, arr: string[]) => (
                                     <React.Fragment key={i}>
                                         {part}
                                         {i < arr.length - 1 && (
@@ -203,7 +213,7 @@ export default function SpaceShooterGame() {
 
                     {/* The Ammo (Options) */}
                     <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 w-full">
-                        {quiz.options.map((opt, i) => (
+                        {quiz.options.map((opt: string, i: number) => (
                             <motion.button
                                 key={i}
                                 whileHover={{ y: -5, scale: 1.05 }}

@@ -92,7 +92,7 @@ export default function KeywordScannerGame() {
                     <span className="text-4xl text-amber-500"><Search size={40} /></span> Máy Quét Dấu Hiệu
                 </h2>
                 <p className="text-slate-500 font-bold mt-2 text-lg">
-                    Hãy tìm và bấm vào những từ khóa làm "dấu hiệu nhận biết" thì tiếng Anh trong câu nhé!
+                    Hãy tìm và bấm vào những từ khóa làm &quot;dấu hiệu nhận biết&quot; thì tiếng Anh trong câu nhé!
                 </p>
             </div>
 
