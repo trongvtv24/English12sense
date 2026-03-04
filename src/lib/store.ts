@@ -10,9 +10,9 @@ interface GameState {
 }
 
 export const useGameStore = create<GameState>((set) => ({
-    score: 120, // Initial score based on demo
+    score: 0,
     level: 1,
-    unlockedTenses: ['present-simple', 'present-continuous', 'past-simple', 'near-future', 'future-simple'],
+    unlockedTenses: [], // Dynamically handled via requiredLevel now
 
     addScore: (points) => set((state) => {
         const newScore = state.score + points;
